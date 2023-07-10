@@ -307,7 +307,7 @@ git log
 git commit --amend
 ```
 
-#### 暂存⼯作区
+#### 暂存工作区
 
 ```bash
 git stash
