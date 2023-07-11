@@ -1,0 +1,118 @@
+// 定义定位的水平垂直居中的混入
+@mixin alignment {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+.app {
+  display: flex;
+  height: 100%;
+  min-height: 810px;
+  > div {
+    padding-top: 40px;
+  }
+}
+.tool-bar {
+  width: 90px;
+  background-color: rgba(236, 236, 236);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // 顶部图标
+  .top {
+    .tool {
+      width: 90px;
+      height: 90px;
+      position: relative;
+      .avatar {
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        position: relative;
+        left: 0;
+        right: 0;
+        margin: auto;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 30px;
+        }
+      }
+      .dot {
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        background-color: rgba(236, 236, 236);
+        border-radius: 14px;
+        right: 0;
+        bottom: 0;
+        .state {
+          width: 14px;
+          height: 14px;
+          border-radius: 7px;
+          background-color: rgb(37, 230, 138);
+          @include alignment();
+        }
+      }
+      .iconfont {
+        font-size: 40px;
+        display: block;
+        color: black;
+        @include alignment();
+        transition: 0.5s;
+      }
+      .outline {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(220, 220, 220, 0);
+        border-radius: 10px;
+        transition: 0.5s;
+        @include alignment();
+
+        &:hover {
+          background-color: rgba(220, 220, 220, 1);
+        }
+      }
+    }
+  }
+  //
+  .bottom {
+    .tool {
+      width: 90px;
+      height: 65px;
+      position: relative;
+      .iconfont {
+        font-size: 35px;
+        display: block;
+        color: black;
+        @include alignment();
+        transition: 0.5s;
+        &:hover {
+          color: rgb(0, 153, 255);
+        }
+      }
+      &:last-child .iconfont {
+        font-size: 25px;
+      }
+    }
+  }
+}
+.chat-list {
+  width: 390px;
+  min-width: 300px;
+  max-width: 480px;
+  background-color: green;
+}
+.chat-room {
+  min-width: 870px;
+  flex: 1;
+  background-color: blue;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* html,
+      body {
+        height: 100%;
+        width: 100%;
+        background-color: red;
+      } */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .box1 {
+        width: 400px;
+        height: 400px;
+        /* background-color: orange; */
+        /* resize: both; */
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: yellow;
+      }
+      .box2 {
+        width: 800px;
+        height: 600px;
+        background-color: skyblue;
+      }
+      .box1::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        /* width: 200px;
+        height: inherit; */
+        /* display: none; */
+      }
+      .box1::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.01);
+        /* background-color: black; */
+        transition: 10s;
+      }
+      .box1:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(90, 90, 90, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box1">
+      <div class="box2">123</div>
+    </div>
+  </body>
+</html>

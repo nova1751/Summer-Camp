@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>拖拽调整盒子宽度</title>
+    <style>
+      .main {
+        display: flex;
+      }
+      .main .left {
+        flex-shrink: 0;
+        width: 300px;
+        height: 600px;
+        border: 1px solid #ccc;
+        position: relative;
+      }
+      .main .content {
+        height: 600px;
+        background-color: #eee;
+        overflow: auto;
+      }
+      .main .right {
+        flex-shrink: 0;
+        width: 400px;
+        height: 600px;
+        border: 1px solid #ccc;
+        position: relative;
+      }
+      /*拖拽区div样式*/
+      .resize {
+        cursor: e-resize;
+        position: absolute;
+        top: 0;
+        /* left: 0; */
+        width: 5px;
+        height: 100%;
+        z-index: 999;
+        font-size: 32px;
+        color: white;
+        user-select: none;
+      }
+      .resize.active {
+        background-color: #0090f1;
+      }
+      .resize:hover {
+        background-color: #0090f1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="left">
+        <div>组件区域</div>
+      </div>
+      <div class="content"><div style="width: 1000px">内容</div></div>
+      <div class="right">
+        <div>属性区域</div>
+      </div>
+    </div>
+    <script>
+      let right = document.querySelector(".right");
+      resizeFn(right, "left");
+
+      let left = document.querySelector(".left");
+      resizeFn(left, "right");
+
+      function resizeFn(element, position) {
+        let resize = element.querySelector(".resize");
+        if (!resize) {
+          element.insertAdjacentHTML(
+            "afterbegin",
+            '<div class="resize" title="收缩侧边栏"></div>'
+          );
+          resize = element.querySelector(".resize");
+        }
+        resize.style[position] = "0";
+        resize.addEventListener("mousedown", function (e) {
+          let startX = e.pageX;
+          let width = element.offsetWidth;
+          resize.classList.add("active");
+          document.addEventListener("mousemove", move);
+          let timer = null;
+          function move(e) {
+            let moveX; // 左右这里切换计算顺序即可
+            if (position === "left") moveX = startX - e.pageX;
+            if (position === "right") moveX = e.pageX - startX;
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+              element.style.width = width + moveX + "px";
+            }, 5);
+          }
+          document.addEventListener(
+            "mouseup",
+            function () {
+              document.removeEventListener("mousemove", move);
+              resize.classList.remove("active");
+            },
+            { once: true }
+          );
+        });
+      }
+    </script>
+  </body>
+</html>
