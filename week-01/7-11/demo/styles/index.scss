@@ -5,7 +5,37 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
-
+// 省略文字
+@mixin flex-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+// 滚动条
+@mixin scroll-bar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.01);
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: rgb(205, 205, 205);
+  }
+}
+$qq-blue: rgb(0, 147, 245);
+$chat-list-grey: rgb(240, 240, 240);
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(205, 205, 205);
+  border-radius: 10px;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.01);
+}
 html,
 body {
   width: 100%;
@@ -33,8 +63,8 @@ body {
       height: 90px;
       position: relative;
       .avatar {
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
         overflow: hidden;
         position: relative;
         left: 0;
@@ -43,7 +73,7 @@ body {
         img {
           width: 100%;
           height: 100%;
-          border-radius: 30px;
+          border-radius: 27.5px;
         }
       }
       .dot {
@@ -62,13 +92,7 @@ body {
           @include alignment();
         }
       }
-      .iconfont {
-        font-size: 40px;
-        display: block;
-        color: black;
-        @include alignment();
-        transition: 0.5s;
-      }
+
       .outline {
         width: 60px;
         height: 60px;
@@ -76,9 +100,19 @@ body {
         border-radius: 10px;
         transition: 0.5s;
         @include alignment();
+        .iconfont {
+          font-size: 40px;
+          display: block;
+          color: black;
+          @include alignment();
+          transition: 0.3s;
+        }
 
         &:hover {
           background-color: rgba(220, 220, 220, 1);
+        }
+        &:active .iconfont {
+          color: $qq-blue;
         }
       }
     }
@@ -90,17 +124,17 @@ body {
       height: 65px;
       position: relative;
       .iconfont {
-        font-size: 35px;
+        font-size: 40px;
         display: block;
         color: black;
         @include alignment();
-        transition: 0.5s;
+        transition: 0.3s;
         &:hover {
-          color: rgb(0, 153, 255);
+          color: $qq-blue;
         }
       }
       &:last-child .iconfont {
-        font-size: 25px;
+        font-size: 30px;
       }
     }
   }
@@ -109,10 +143,267 @@ body {
   width: 390px;
   min-width: 300px;
   max-width: 480px;
-  background-color: green;
+  display: flex;
+  flex-direction: column;
+  .search-bar {
+    height: 60px;
+    background-color: white;
+    display: flex;
+    padding: 0 20px;
+    flex-shrink: 0;
+    .search {
+      width: 200px;
+      height: 40px;
+      background-color: $chat-list-grey;
+      border: 1px solid transparent;
+      margin-right: 10px;
+      flex: 1;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      .iconfont {
+        font-size: 30px;
+        color: rgb(147, 147, 147);
+        display: block;
+      }
+      #search {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        height: 100%;
+        width: 100%;
+        font-size: 18px;
+        &::placeholder {
+          color: rgb(147, 147, 147);
+        }
+      }
+      &:focus-within {
+        border: 1px solid rgb(0, 153, 255);
+        // box-shadow: 0 0 0 1px rgb(0, 153, 255);
+      }
+      #clear {
+        display: none;
+        .iconfont {
+          color: rgb(170, 170, 170);
+          font-size: 25px;
+          cursor: pointer;
+        }
+      }
+    }
+    .add {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgb(245, 245, 245);
+      &:hover {
+        background-color: rgb(235, 235, 235);
+        cursor: pointer;
+      }
+      &:active {
+        background-color: rgb(215, 215, 215);
+      }
+    }
+  }
+  .list {
+    // background-color: skyblue;
+    height: 100%;
+    overflow: auto;
+    user-select: none;
+    @include scroll-bar();
+    .item {
+      height: 100px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        overflow: hidden;
+        flex-shrink: 0;
+        margin-right: 10px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .info {
+        overflow: hidden;
+        flex: 1;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+        .name {
+          @include flex-ellipsis();
+          font-size: 24px;
+        }
+        .msg {
+          @include flex-ellipsis();
+          font-size: 18px;
+          color: rgb(174, 174, 174);
+        }
+      }
+      .badage {
+        width: 50px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-end;
+        .time {
+          color: rgb(160, 160, 160);
+        }
+        .hot {
+          padding: 4px;
+          font-weight: bold;
+          border-radius: 14px;
+          min-width: 30px;
+          height: 24px;
+          vertical-align: middle;
+          background-color: rgb(192, 192, 192);
+          color: white;
+          text-align: center;
+        }
+      }
+      &:hover {
+        background-color: rgb(245, 245, 245);
+      }
+      &:active {
+        color: white;
+        background-color: $qq-blue;
+        .msg,
+        .time {
+          color: white;
+        }
+      }
+    }
+  }
+}
+.resize-handle {
+  width: 4px;
+  // background-color: skyblue;
+  cursor: ew-resize;
+  flex-shrink: 0;
 }
 .chat-room {
   min-width: 870px;
   flex: 1;
-  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(242, 242, 242);
+  // overflow: hidden;
+  .header {
+    height: 60px;
+    border-bottom: 2px solid rgb(233, 233, 233);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    div {
+      font-size: 30px;
+    }
+    .tool-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .tool {
+        padding: 0 10px;
+        &:first-child {
+          display: flex;
+          align-items: center;
+          .iconfont:last-child {
+            font-size: 15px;
+          }
+        }
+        .iconfont {
+          font-size: 30px;
+        }
+        &:first-child {
+          padding-right: 0px;
+        }
+        &:last-child {
+          padding-right: 0;
+        }
+        &:hover {
+          color: $qq-blue;
+        }
+      }
+    }
+  }
+  .chat-area {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+    .chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .aside {
+      flex-shrink: 0;
+      width: 270px;
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      border-left: 2px solid rgb(233, 233, 233);
+      .member-info {
+        margin: 0 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+        flex-shrink: 0;
+        .iconfont {
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+      .member-list {
+        overflow: auto;
+        @include scroll-bar();
+        .member {
+          margin: 0 15px;
+          height: 35px;
+          margin-top: 15px;
+          display: flex;
+          align-items: center;
+          border-radius: 5px;
+          padding: 0 10px;
+          .avatar {
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .name {
+            @include flex-ellipsis();
+            margin: 0 12px;
+            font-size: 20px;
+            color: rgb(153, 153, 153);
+          }
+          .status {
+            flex-shrink: 0;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: rgb(237, 214, 199);
+            color: rgb(255, 141, 64);
+            font-size: 16px;
+          }
+          &:hover {
+            background-color: rgb(233, 233, 233);
+          }
+        }
+      }
+    }
+  }
 }

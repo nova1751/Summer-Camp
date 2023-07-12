@@ -12,6 +12,7 @@
 > 不同模块高度设置
 > 整体页面最小高度：`min-height: 810px`
 > 输入框高度：`min-height: 220px` `max-height`
+> 聊天列表项目大小：`width: 420px;height: 100px`
 
-- [x] 完成了侧边工具栏的书写
+- [x] 完成了侧边工具栏的书写。
 - [x] 完成了`resize`方案的选定。
