@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modal Animation</title>
+    <style>
+      /* Modal container */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Modal content */
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        padding: 20px;
+        width: 400px;
+        border-radius: 4px;
+        animation-name: modal-animation;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-out;
+      }
+
+      /* Animation keyframes */
+      @keyframes modal-animation {
+        0% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Show modal */
+      .modal.show {
+        display: flex;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button onclick="showModal()">Open Modal</button>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h2>Modal Title</h2>
+        <p>This is the modal content.</p>
+        <button onclick="hideModal()">Close Modal</button>
+      </div>
+    </div>
+
+    <script>
+      function showModal() {
+        document.getElementById("modal").classList.add("show");
+      }
+
+      function hideModal() {
+        // document.getElementById("modal").style.animation =
+        //   "modal-animation 0.3s ease-in reverse";
+        setTimeout(() => {
+          document.getElementById("modal").classList.remove("show");
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 模态框的容器 */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        z-index: 2000;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      /* 模态框的内容 */
+      .modal-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        max-width: 520px;
+        max-height: calc(100% - 15px);
+        overflow: auto;
+        background-color: white;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        transition: 1s;
+      }
+
+      /* 模态框的头部 */
+      .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        border-bottom: 1px solid #ebeef5;
+      }
+
+      /* 模态框的关闭按钮 */
+      .modal-close {
+        width: 40px;
+        height: 40px;
+        border: none;
+        background-color: transparent;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      /* 模态框的主体 */
+      .modal-body {
+        padding: 20px;
+        font-size: 14px;
+        color: #606266;
+        line-height: 1.5;
+      }
+
+      /* 模态框的底部 */
+      .modal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 10px 20px;
+        border-top: 1px solid #ebeef5;
+      }
+
+      /* 模态框的底部按钮 */
+      .modal-button {
+        min-width: 60px;
+        height: 36px;
+        margin-left: 10px;
+        border-radius: 4px;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      /* 模态框的取消按钮 */
+      .modal-button-cancel {
+        background-color: #e4e7ed;
+        color: #606266;
+      }
+
+      /* 模态框的确定按钮 */
+      .modal-button-confirm {
+        background-color: #409eff;
+      }
+
+      /* 模态框的触发按钮 */
+      .modal-open {
+        display: block;
+        margin: auto;
+        width: 120 px;
+        height: 40 px;
+        border-radius: 4 px;
+        border: none;
+        background-color: #409 eff;
+        color: white;
+        font-size: 16 px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 模态框的容器 -->
+    <div class="modal" id="myModal">
+      <!-- 模态框的内容 -->
+      <div class="modal-dialog">
+        <!-- 模态框的头部 -->
+        <div class="modal-header">
+          <span>模态框标题</span>
+          <button class="modal-close" onclick="closeModal()">×</button>
+        </div>
+
+        <!-- 模态框的主体 -->
+        <div class="modal-body">
+          <p>这是一个模仿element-plus的模态框。</p>
+          <p>它只用了html和css，没有用JavaScript和Vue。</p>
+          <p>所以它可能不会完全一样，也没有交互功能。</p>
+          <p>这只是一个演示，您可以根据自己的需求来修改样式和内容。</p>
+        </div>
+
+        <!-- 模态框的底部 -->
+        <div class="modal-footer">
+          <button
+            class="modal-button modal-button-cancel"
+            onclick="closeModal()"
+          >
+            取消
+          </button>
+          <button
+            class="modal-button modal-button-confirm"
+            onclick="closeModal()"
+          >
+            确定
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 模态框的触发按钮 -->
+    <button class="modal-open" onclick="openModal()">打开模态框</button>
+
+    <script>
+      // 获取模态框的容器
+      var modal = document.getElementById("myModal");
+
+      // 打开模态框的函数
+      function openModal() {
+        modal.style.display = "block";
+      }
+
+      // 关闭模态框的函数
+      function closeModal() {
+        modal.style.display = "none";
+      }
+    </script>
+  </body>
+</html>
