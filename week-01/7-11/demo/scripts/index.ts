@@ -197,3 +197,10 @@ upload.addEventListener("change", () => {
   upload.value = "";
   setTimeout(() => (msg.scrollTop = msg.scrollHeight), 100);
 });
+
+const box = document.querySelector("#box") as HTMLDivElement;
+
+const toggle = () => {
+  const display = window.getComputedStyle(box).getPropertyValue("display");
+  box.style.display = display == "none" ? "block" : "none";
+};

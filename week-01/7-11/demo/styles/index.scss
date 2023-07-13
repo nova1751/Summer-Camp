@@ -355,8 +355,43 @@ body {
         &:first-child {
           display: flex;
           align-items: center;
+          position: relative;
+          &:hover {
+            color: $qq-blue;
+          }
           .iconfont:last-child {
             font-size: 15px;
+          }
+          .box {
+            width: 150px;
+            height: 290px;
+            padding: 0 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            background-color: white;
+            position: absolute;
+            display: none;
+            top: 40px;
+            user-select: none;
+            color: black;
+            .group {
+              margin-top: 15px;
+              display: flex;
+              align-items: center;
+              justify-content: space-around;
+              padding: 0 10px;
+              height: 40px;
+              border-radius: 10px;
+              .iconfont {
+                font-size: 20px;
+              }
+              div {
+                font-size: 20px;
+              }
+              &:hover {
+                background-color: rgb(245, 245, 245);
+              }
+            }
           }
         }
         .iconfont {
@@ -368,7 +403,7 @@ body {
         &:last-child {
           padding-right: 0;
         }
-        &:hover {
+        & .iconfont:hover {
           color: $qq-blue;
         }
       }

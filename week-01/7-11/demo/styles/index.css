@@ -315,9 +315,46 @@ body {
 .chat-room .header .tool-box .tool:first-child {
   display: flex;
   align-items: center;
+  position: relative;
+}
+.chat-room .header .tool-box .tool:first-child:hover {
+  color: rgb(0, 147, 245);
 }
 .chat-room .header .tool-box .tool:first-child .iconfont:last-child {
   font-size: 15px;
+}
+.chat-room .header .tool-box .tool:first-child .box {
+  width: 150px;
+  height: 290px;
+  padding: 0 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+  position: absolute;
+  display: none;
+  top: 40px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  color: black;
+}
+.chat-room .header .tool-box .tool:first-child .box .group {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 10px;
+  height: 40px;
+  border-radius: 10px;
+}
+.chat-room .header .tool-box .tool:first-child .box .group .iconfont {
+  font-size: 20px;
+}
+.chat-room .header .tool-box .tool:first-child .box .group div {
+  font-size: 20px;
+}
+.chat-room .header .tool-box .tool:first-child .box .group:hover {
+  background-color: rgb(245, 245, 245);
 }
 .chat-room .header .tool-box .tool .iconfont {
   font-size: 36px;
@@ -328,7 +365,7 @@ body {
 .chat-room .header .tool-box .tool:last-child {
   padding-right: 0;
 }
-.chat-room .header .tool-box .tool:hover {
+.chat-room .header .tool-box .tool .iconfont:hover {
   color: rgb(0, 147, 245);
 }
 .chat-room .chat-area {

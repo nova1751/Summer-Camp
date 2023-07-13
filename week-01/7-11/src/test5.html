@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      /* 设置下拉按钮的样式 */
+      .dropbtn {
+        width: 200px;
+        height: 40px;
+        border: 1px solid #ebeef5;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #606266;
+        font-size: 14px;
+        padding: 10px;
+        cursor: pointer;
+        outline: none;
+      }
+
+      /* 设置下拉按钮的图标 */
+      .dropbtn::after {
+        content: "\25bc";
+        float: right;
+        margin-left: 5px;
+      }
+
+      /* 设置下拉按钮的悬停样式 */
+      .dropbtn:hover {
+        border-color: #c0c4cc;
+      }
+
+      /* 设置下拉按钮的点击样式 */
+      .dropbtn:active {
+        background-color: #f2f6fc;
+        border-color: #409eff;
+        color: #409eff;
+      }
+
+      /* 设置容器元素 - 需要放置下拉内容 */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* 设置下拉内容的样式 */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 200px;
+        max-height: 200px;
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #ebeef5;
+        border-radius: 4px;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        z-index: 1;
+      }
+
+      /* 设置下拉内容的链接样式 */
+      .dropdown-content a {
+        display: block;
+        color: #606266;
+        font-size: 14px;
+        padding: 10px;
+        text-decoration: none;
+      }
+
+      /* 设置下拉内容的链接的悬停样式 */
+      .dropdown-content a:hover {
+        background-color: #f5f7fa;
+        color: #409eff;
+      }
+
+      /* 设置下拉内容的链接的选中样式 */
+      .dropdown-content a.selected {
+        background-color: #409eff;
+        color: #fff;
+      }
+
+      /* 悬停时显示下拉内容 */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+    </style>
+
+    <div class="dropdown">
+      <button class="dropbtn">请选择</button>
+      <div class="dropdown-content">
+        <a href="#">选项一</a>
+        <a href="#">选项二</a>
+        <a href="#">选项三</a>
+        <a href="#">选项四</a>
+        <a href="#">选项五</a>
+      </div>
+    </div>
+  </body>
+</html>
