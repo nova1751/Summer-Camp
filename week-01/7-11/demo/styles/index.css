@@ -349,6 +349,17 @@ body {
   padding: 10px 30px;
   overflow: auto;
 }
+.chat-room .chat-area .chat .msg::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-room .chat-area .chat .msg::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.01);
+}
+.chat-room .chat-area .chat .msg:hover::-webkit-scrollbar-thumb {
+  background-color: rgb(205, 205, 205);
+}
 .chat-room .chat-area .chat .msg .msg-left {
   align-self: flex-start;
   display: flex;

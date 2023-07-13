@@ -282,7 +282,7 @@
         </div>
         <div class="chat-area">
           <div class="chat">
-            <div class="msg">
+            <div class="msg" id="msg-list">
               <div class="msg-left">
                 <div class="avatar">
                   <img src="./images/noa.png" alt="" srcset="" />
@@ -354,6 +354,12 @@
               </div>
             </div>
             <div class="resize"></div>
+            <input
+              type="file"
+              accept="image/*"
+              id="upload"
+              style="display: none"
+            />
             <div class="edit">
               <div class="tools">
                 <div class="left">
@@ -367,7 +373,7 @@
                   <div class="tool">
                     <i class="iconfont icon-folder1"></i>
                   </div>
-                  <div class="tool">
+                  <div class="tool" id="imgUp">
                     <i class="iconfont icon-photo"></i>
                   </div>
                   <div class="tool">
@@ -383,9 +389,9 @@
                   </div>
                 </div>
               </div>
-              <div class="write" contenteditable="true"></div>
+              <div class="write" contenteditable="true" id="editor"></div>
               <div class="btn">
-                <button>
+                <button id="sendMsg">
                   <div>发送</div>
                   <div>|</div>
                   <div><i class="iconfont icon-xiala"></i></div>
