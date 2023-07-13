@@ -25,12 +25,51 @@
     background-color: rgb(205, 205, 205);
   }
 }
+@mixin msg($align-self: flex-start, $font-color: black, $bg-color: white) {
+  align-self: $align-self;
+  display: flex;
+  max-width: 80%;
+  margin-top: 30px;
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 10px;
+    flex-shrink: 0;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .bubble {
+    border-radius: 5px;
+    background-color: $bg-color;
+    padding: 10px;
+    overflow-wrap: break-word;
+    min-width: 0;
+    // overflow: hidden;
+    display: flex;
+    align-items: center;
+    .text {
+      font-size: 18px;
+      line-height: 24px;
+      overflow: hidden;
+      color: $font-color;
+      // white-space: pre-line;
+    }
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+}
 $qq-blue: rgb(0, 147, 245);
 $chat-list-grey: rgb(240, 240, 240);
 $border-line: 2px solid rgb(233, 233, 233);
 *::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
 }
 *::-webkit-scrollbar-thumb {
   background-color: rgb(205, 205, 205);
@@ -342,8 +381,18 @@ body {
       flex: 1;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
       .msg {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 30px;
+        overflow: auto;
+      .msg-left {
+        @include msg();
+      }
+      .msg-right {
+        @include msg(flex-end, $qq-blue, white);
       }
       .resize {
         height: 4px;
@@ -393,10 +442,14 @@ body {
           }
         }
         .write {
+          @include scroll-bar();
           height: 100%;
           padding: 10px 30px;
           font-size: 24px;
           overflow: auto;
+          img {
+            width: 400px;
+          }
         }
         .btn {
           height: 80px;

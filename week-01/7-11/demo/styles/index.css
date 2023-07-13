@@ -1,6 +1,6 @@
 *::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -340,9 +340,81 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
-.chat-room .chat-area .chat .msg {
-  flex: 1;
+.chat-room .chat-area .chat .msg-left {
+  align-self: flex-start;
+  display: flex;
+  max-width: 80%;
+  margin-top: 30px;
+}
+.chat-room .chat-area .chat .msg-left .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+.chat-room .chat-area .chat .msg-left .avatar img {
+  width: 100%;
+  height: 100%;
+}
+.chat-room .chat-area .chat .msg-left .bubble {
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  overflow-wrap: break-word;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+.chat-room .chat-area .chat .msg-left .bubble .text {
+  font-size: 18px;
+  line-height: 24px;
+  overflow: hidden;
+  color: black;
+}
+.chat-room .chat-area .chat .msg-left .bubble img {
+  width: 100%;
+  display: block;
+}
+.chat-room .chat-area .chat .msg-right {
+  align-self: flex-end;
+  display: flex;
+  max-width: 80%;
+  margin-top: 30px;
+}
+.chat-room .chat-area .chat .msg-right .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+.chat-room .chat-area .chat .msg-right .avatar img {
+  width: 100%;
+  height: 100%;
+}
+.chat-room .chat-area .chat .msg-right .bubble {
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  overflow-wrap: break-word;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+.chat-room .chat-area .chat .msg-right .bubble .text {
+  font-size: 18px;
+  line-height: 24px;
+  overflow: hidden;
+  color: rgb(0, 147, 245);
+}
+.chat-room .chat-area .chat .msg-right .bubble img {
+  width: 100%;
+  display: block;
 }
 .chat-room .chat-area .chat .resize {
   height: 4px;
@@ -394,6 +466,20 @@ body {
   padding: 10px 30px;
   font-size: 24px;
   overflow: auto;
+}
+.chat-room .chat-area .chat .edit .write::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-room .chat-area .chat .edit .write::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.01);
+}
+.chat-room .chat-area .chat .edit .write:hover::-webkit-scrollbar-thumb {
+  background-color: rgb(205, 205, 205);
+}
+.chat-room .chat-area .chat .edit .write img {
+  width: 400px;
 }
 .chat-room .chat-area .chat .edit .btn {
   height: 80px;
