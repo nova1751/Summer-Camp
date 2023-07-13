@@ -388,11 +388,12 @@ body {
         flex-direction: column;
         padding: 10px 30px;
         overflow: auto;
-      .msg-left {
-        @include msg();
-      }
-      .msg-right {
-        @include msg(flex-end, $qq-blue, white);
+        .msg-left {
+          @include msg();
+        }
+        .msg-right {
+          @include msg(flex-end, white, rgb(0, 153, 255));
+        }
       }
       .resize {
         height: 4px;

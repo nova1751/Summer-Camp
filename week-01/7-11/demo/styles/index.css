@@ -342,13 +342,20 @@ body {
   flex-direction: column;
   overflow: hidden;
 }
-.chat-room .chat-area .chat .msg-left {
+.chat-room .chat-area .chat .msg {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px;
+  overflow: auto;
+}
+.chat-room .chat-area .chat .msg .msg-left {
   align-self: flex-start;
   display: flex;
   max-width: 80%;
   margin-top: 30px;
 }
-.chat-room .chat-area .chat .msg-left .avatar {
+.chat-room .chat-area .chat .msg .msg-left .avatar {
   width: 50px;
   height: 50px;
   border-radius: 25px;
@@ -356,11 +363,11 @@ body {
   margin: 0 10px;
   flex-shrink: 0;
 }
-.chat-room .chat-area .chat .msg-left .avatar img {
+.chat-room .chat-area .chat .msg .msg-left .avatar img {
   width: 100%;
   height: 100%;
 }
-.chat-room .chat-area .chat .msg-left .bubble {
+.chat-room .chat-area .chat .msg .msg-left .bubble {
   border-radius: 5px;
   background-color: white;
   padding: 10px;
@@ -369,23 +376,23 @@ body {
   display: flex;
   align-items: center;
 }
-.chat-room .chat-area .chat .msg-left .bubble .text {
+.chat-room .chat-area .chat .msg .msg-left .bubble .text {
   font-size: 18px;
   line-height: 24px;
   overflow: hidden;
   color: black;
 }
-.chat-room .chat-area .chat .msg-left .bubble img {
+.chat-room .chat-area .chat .msg .msg-left .bubble img {
   width: 100%;
   display: block;
 }
-.chat-room .chat-area .chat .msg-right {
+.chat-room .chat-area .chat .msg .msg-right {
   align-self: flex-end;
   display: flex;
   max-width: 80%;
   margin-top: 30px;
 }
-.chat-room .chat-area .chat .msg-right .avatar {
+.chat-room .chat-area .chat .msg .msg-right .avatar {
   width: 50px;
   height: 50px;
   border-radius: 25px;
@@ -393,26 +400,26 @@ body {
   margin: 0 10px;
   flex-shrink: 0;
 }
-.chat-room .chat-area .chat .msg-right .avatar img {
+.chat-room .chat-area .chat .msg .msg-right .avatar img {
   width: 100%;
   height: 100%;
 }
-.chat-room .chat-area .chat .msg-right .bubble {
+.chat-room .chat-area .chat .msg .msg-right .bubble {
   border-radius: 5px;
-  background-color: white;
+  background-color: rgb(0, 153, 255);
   padding: 10px;
   overflow-wrap: break-word;
   min-width: 0;
   display: flex;
   align-items: center;
 }
-.chat-room .chat-area .chat .msg-right .bubble .text {
+.chat-room .chat-area .chat .msg .msg-right .bubble .text {
   font-size: 18px;
   line-height: 24px;
   overflow: hidden;
-  color: rgb(0, 147, 245);
+  color: white;
 }
-.chat-room .chat-area .chat .msg-right .bubble img {
+.chat-room .chat-area .chat .msg .msg-right .bubble img {
   width: 100%;
   display: block;
 }
