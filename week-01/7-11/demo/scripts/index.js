@@ -63,3 +63,30 @@ resize1.addEventListener("mousedown", (e) => {
     document.addEventListener("mousemove", mouseMove);
     document.addEventListener("mouseup", mouseUp);
 });
+const resizeY = document.querySelector(".resize");
+const edit = document.querySelector(".edit");
+// 记录鼠标初始坐标与元素初始宽度
+let startY = 0;
+let startHeight = 0;
+// 鼠标移动事件的处理函数
+const mouseMoveY = (e) => {
+    e.preventDefault();
+    let moveY = e.clientY - startY;
+    // 修改左侧元素的宽度
+    edit.style.height = startHeight - moveY + "px";
+};
+const mouseUpY = (e) => {
+    e.preventDefault();
+    body.style.cursor = "auto";
+    document.removeEventListener("mousemove", mouseMoveY);
+    document.removeEventListener("mouseup", mouseUpY);
+};
+resizeY.addEventListener("mousedown", (e) => {
+    body.style.cursor = "ns-resize";
+    e.preventDefault();
+    startY = e.clientY;
+    startHeight = edit.offsetHeight;
+    // 给文档添加事件
+    document.addEventListener("mousemove", mouseMoveY);
+    document.addEventListener("mouseup", mouseUpY);
+});

@@ -27,6 +27,7 @@
 }
 $qq-blue: rgb(0, 147, 245);
 $chat-list-grey: rgb(240, 240, 240);
+$border-line: 2px solid rgb(233, 233, 233);
 *::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -297,7 +298,7 @@ body {
   // overflow: hidden;
   .header {
     height: 60px;
-    border-bottom: 2px solid rgb(233, 233, 233);
+    border-bottom: $border-line;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -319,7 +320,7 @@ body {
           }
         }
         .iconfont {
-          font-size: 30px;
+          font-size: 36px;
         }
         &:first-child {
           padding-right: 0px;
@@ -341,6 +342,92 @@ body {
       flex: 1;
       display: flex;
       flex-direction: column;
+      .msg {
+        flex: 1;
+      }
+      .resize {
+        height: 4px;
+        cursor: ns-resize;
+        flex-shrink: 0;
+      }
+      .edit {
+        flex-shrink: 0;
+        min-height: 220px;
+        max-height: 490px;
+        height: 365px;
+        border-top: $border-line;
+        display: flex;
+        flex-direction: column;
+        .tools {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 30px;
+          .left {
+            display: flex;
+            .tool {
+              margin-right: 20px;
+              .iconfont {
+                font-size: 35px;
+              }
+              &:nth-child(2) {
+                display: flex;
+                align-items: center;
+                .iconfont:last-child {
+                  font-size: 20px;
+                }
+              }
+              &:hover {
+                color: $qq-blue;
+              }
+            }
+          }
+
+          .right {
+            .iconfont {
+              font-size: 35px;
+            }
+            &:hover {
+              color: $qq-blue;
+            }
+          }
+        }
+        .write {
+          height: 100%;
+          padding: 10px 30px;
+          font-size: 24px;
+          overflow: auto;
+        }
+        .btn {
+          height: 80px;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          padding: 20px 30px;
+          button {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 140px;
+            height: 40px;
+            font-size: 20px;
+            color: white;
+            background-color: rgb(0, 153, 255);
+            border: none;
+            border-radius: 5px;
+            .iconfont {
+              font-size: 20px;
+            }
+            &:hover {
+              background-color: rgb(0, 147, 245);
+            }
+            &:active {
+              background-color: rgb(0, 134, 224);
+            }
+          }
+        }
+      }
     }
     .aside {
       flex-shrink: 0;
@@ -349,7 +436,7 @@ body {
       display: flex;
       flex-direction: column;
       user-select: none;
-      border-left: 2px solid rgb(233, 233, 233);
+      border-left: $border-line;
       .member-info {
         margin: 0 15px;
         display: flex;

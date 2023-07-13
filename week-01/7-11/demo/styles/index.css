@@ -320,7 +320,7 @@ body {
   font-size: 15px;
 }
 .chat-room .header .tool-box .tool .iconfont {
-  font-size: 30px;
+  font-size: 36px;
 }
 .chat-room .header .tool-box .tool:first-child {
   padding-right: 0px;
@@ -340,6 +340,89 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+.chat-room .chat-area .chat .msg {
+  flex: 1;
+}
+.chat-room .chat-area .chat .resize {
+  height: 4px;
+  cursor: ns-resize;
+  flex-shrink: 0;
+}
+.chat-room .chat-area .chat .edit {
+  flex-shrink: 0;
+  min-height: 220px;
+  max-height: 490px;
+  height: 365px;
+  border-top: 2px solid rgb(233, 233, 233);
+  display: flex;
+  flex-direction: column;
+}
+.chat-room .chat-area .chat .edit .tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+.chat-room .chat-area .chat .edit .tools .left {
+  display: flex;
+}
+.chat-room .chat-area .chat .edit .tools .left .tool {
+  margin-right: 20px;
+}
+.chat-room .chat-area .chat .edit .tools .left .tool .iconfont {
+  font-size: 35px;
+}
+.chat-room .chat-area .chat .edit .tools .left .tool:nth-child(2) {
+  display: flex;
+  align-items: center;
+}
+.chat-room .chat-area .chat .edit .tools .left .tool:nth-child(2) .iconfont:last-child {
+  font-size: 20px;
+}
+.chat-room .chat-area .chat .edit .tools .left .tool:hover {
+  color: rgb(0, 147, 245);
+}
+.chat-room .chat-area .chat .edit .tools .right .iconfont {
+  font-size: 35px;
+}
+.chat-room .chat-area .chat .edit .tools .right:hover {
+  color: rgb(0, 147, 245);
+}
+.chat-room .chat-area .chat .edit .write {
+  height: 100%;
+  padding: 10px 30px;
+  font-size: 24px;
+  overflow: auto;
+}
+.chat-room .chat-area .chat .edit .btn {
+  height: 80px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px 30px;
+}
+.chat-room .chat-area .chat .edit .btn button {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 140px;
+  height: 40px;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(0, 153, 255);
+  border: none;
+  border-radius: 5px;
+}
+.chat-room .chat-area .chat .edit .btn button .iconfont {
+  font-size: 20px;
+}
+.chat-room .chat-area .chat .edit .btn button:hover {
+  background-color: rgb(0, 147, 245);
+}
+.chat-room .chat-area .chat .edit .btn button:active {
+  background-color: rgb(0, 134, 224);
 }
 .chat-room .chat-area .aside {
   flex-shrink: 0;
