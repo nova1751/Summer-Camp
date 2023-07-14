@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Frontend Page Navigation with Route Caching</title>
+    <style>
+      /* 页面内容容器 */
+      .page-container {
+        display: none; /* 初始状态下隐藏所有页面内容 */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#/">首页</a></li>
+          <li><a href="#/about">关于</a></li>
+          <li><a href="#/contact">联系我们</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="content"></div>
+
+    <script>
+      // 定义页面路由和对应的页面内容
+      const routes = {
+        "/": "这是首页",
+        "/about": "这是关于页面",
+        "/contact": "这是联系我们页面",
+      };
+
+      // 创建缓存对象
+      const cache = {};
+
+      // 获取要显示的页面内容
+      function getContent(route) {
+        if (cache[route]) {
+          return Promise.resolve(cache[route]);
+        } else {
+          return new Promise((resolve, reject) => {
+            // 模拟异步加载页面内容
+            setTimeout(() => {
+              if (routes[route]) {
+                cache[route] = routes[route];
+                resolve(routes[route]);
+              } else {
+                reject("页面不存在");
+              }
+            }, 500);
+          });
+        }
+      }
+
+      // 更新页面内容
+      function updateContent(content) {
+        const container = document.getElementById("content");
+        container.innerHTML = content;
+      }
+
+      // 处理页面导航
+      function handleNavigation() {
+        console.log(window);
+        const route = window.location.hash.slice(1);
+        getContent(route)
+          .then((content) => updateContent(content))
+          .catch((error) => updateContent(error));
+      }
+
+      // 监听导航事件
+      window.addEventListener("hashchange", handleNavigation);
+
+      // 初始化应用
+      handleNavigation();
+    </script>
+  </body>
+</html>

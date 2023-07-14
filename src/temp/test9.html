@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">首页</a></li>
+          <li><a href="/about">关于</a></li>
+          <li><a href="/contact">联系我们</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="content"></div>
+  </body>
+  <script>
+    // 定义页面路由和对应的页面内容
+    const routes = {
+      "/": "这是首页",
+      "/about": "这是关于页面",
+      "/contact": "这是联系我们页面",
+    };
+
+    // 创建缓存对象
+    const cache = {};
+
+    // 获取要显示的页面内容
+    function getContent(route) {
+      if (cache[route]) {
+        return Promise.resolve(cache[route]);
+      } else {
+        return new Promise((resolve, reject) => {
+          // 模拟异步加载页面内容
+          setTimeout(() => {
+            if (routes[route]) {
+              cache[route] = routes[route];
+              resolve(routes[route]);
+            } else {
+              reject("页面不存在");
+            }
+          }, 500);
+        });
+      }
+    }
+
+    // 更新页面内容
+    function updateContent(content) {
+      const container = document.getElementById("content");
+      container.innerHTML = content;
+    }
+
+    // 处理页面导航
+    function handleNavigation(pathname) {
+      const route = pathname || "/";
+      getContent(route)
+        .then((content) => updateContent(content))
+        .catch((error) => updateContent(error));
+    }
+
+    // 监听导航事件
+    window.addEventListener("popstate", () => {
+      handleNavigation(window.location.pathname);
+    });
+
+    // 初始化应用
+    handleNavigation(window.location.pathname);
+
+    // 处理导航链接点击事件
+    const navLinks = document.querySelectorAll("nav a");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const pathname = link.getAttribute("href");
+        history.pushState(null, null, pathname);
+        handleNavigation(pathname);
+      });
+    });
+  </script>
+</html>
