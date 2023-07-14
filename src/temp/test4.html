@@ -26,9 +26,6 @@
         padding: 20px;
         width: 400px;
         border-radius: 4px;
-        animation-name: modal-animation;
-        animation-duration: 0.3s;
-        animation-timing-function: ease-out;
       }
 
       /* Animation keyframes */
@@ -42,10 +39,29 @@
           transform: translateY(0);
         }
       }
+      @keyframes modal-animation1 {
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+      }
 
-      /* Show modal */
-      .modal.show {
-        display: flex;
+      /* Show modal content */
+      .modal-content.show {
+        animation-name: modal-animation;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-out;
+      }
+
+      /* Hide modal content */
+      .modal-content.hide {
+        animation-name: modal-animation1;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-in;
       }
     </style>
   </head>
@@ -54,7 +70,7 @@
     <button onclick="showModal()">Open Modal</button>
 
     <div id="modal" class="modal">
-      <div class="modal-content">
+      <div id="modal-content" class="modal-content">
         <h2>Modal Title</h2>
         <p>This is the modal content.</p>
         <button onclick="hideModal()">Close Modal</button>
@@ -63,13 +79,19 @@
 
     <script>
       function showModal() {
-        document.getElementById("modal").classList.add("show");
+        var modalContent = document.getElementById("modal-content");
+        modalContent.classList.add("show");
+        document.getElementById("modal").style.display = "flex";
       }
 
       function hideModal() {
-        // document.getElementById("modal").style.animation =
-        //   "modal-animation 0.3s ease-in reverse";
-        document.getElementById("modal").classList.remove("show");
+        var modalContent = document.getElementById("modal-content");
+        modalContent.classList.add("hide");
+        setTimeout(function () {
+          modalContent.classList.remove("show");
+          modalContent.classList.remove("hide");
+          document.getElementById("modal").style.display = "none";
+        }, 300);
       }
     </script>
   </body>

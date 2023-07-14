@@ -56,8 +56,15 @@
         <div class="search-bar">
           <div class="search">
             <span><i class="iconfont icon-search"></i></span>
-            <input type="text" id="search" placeholder="搜索" />
-            <span id="clear"><i class="iconfont icon-clear"></i></span>
+            <input
+              type="text"
+              id="search"
+              placeholder="搜索"
+              class="search-bar1"
+            />
+            <span id="clear" class="clear"
+              ><i class="iconfont icon-clear"></i
+            ></span>
           </div>
           <button class="add"><i class="iconfont icon-add"></i></button>
         </div>
@@ -296,13 +303,157 @@
                 </div>
               </div>
             </div>
-            <div class="tool"><i class="iconfont icon-iconfontphone"></i></div>
-            <div class="tool"><i class="iconfont icon-video"></i></div>
-            <div class="tool">
+            <div class="tool" onclick="openModal()">
+              <i class="iconfont icon-iconfontphone"></i>
+            </div>
+            <div class="tool" onclick="openModal()">
+              <i class="iconfont icon-video"></i>
+            </div>
+            <div class="tool" onclick="openModal()">
               <i class="iconfont icon-pingmugongxiang"></i>
             </div>
-            <div class="tool"><i class="iconfont icon-tianjiahaoyou"></i></div>
-            <div class="tool"><i class="iconfont icon-iosgengduo"></i></div>
+            <div class="tool" onclick="openModal()">
+              <i class="iconfont icon-tianjiahaoyou"></i>
+            </div>
+            <div class="tool" onclick="openSide()">
+              <i class="iconfont icon-iosgengduo"></i>
+            </div>
+          </div>
+          <div class="modal" id="myModal">
+            <!-- 模态框的内容 -->
+            <div class="modal-dialog" id="dialog">
+              <div class="left">
+                <div class="search">
+                  <span><i class="iconfont icon-search"></i></span>
+                  <input
+                    type="text"
+                    class="search-bar1"
+                    id="search2"
+                    placeholder="搜索"
+                    autofocus
+                  />
+                  <span id="clear2" class="clear"
+                    ><i class="iconfont icon-clear"></i
+                  ></span>
+                </div>
+                <div class="contact">
+                  <div class="row drag-row">
+                    <i
+                      class="iconfont icon-xiala"
+                      id="icon"
+                      style="transform: rotate(-90deg)"
+                    ></i
+                    >最近联系人
+                    <div class="user-list" id="userList">
+                      <div class="user">
+                        <label>
+                          <input
+                            type="checkbox"
+                            id="check-only"
+                            class="check-only"
+                          />
+                          <label for="check-only" class="label">✓</label>
+                          <div class="avatar">
+                            <img src="./images/noa.png" alt="" />
+                          </div>
+                          <div class="name">测试测试测试</div></label
+                        >
+                      </div>
+                      <div class="user">
+                        <label>
+                          <input
+                            type="checkbox"
+                            id="check-only1"
+                            class="check-only"
+                          />
+                          <label for="check-only1" class="label">✓</label>
+                          <div class="avatar">
+                            <img src="./images/noa.png" alt="" />
+                          </div>
+                          <div class="name">测试测试测试</div></label
+                        >
+                      </div>
+                      <div class="user">
+                        <label>
+                          <input
+                            type="checkbox"
+                            id="check-only3"
+                            class="check-only"
+                          />
+                          <label for="check-only3" class="label">✓</label>
+                          <div class="avatar">
+                            <img src="./images/noa.png" alt="" />
+                          </div>
+                          <div class="name">测试测试测试</div></label
+                        >
+                      </div>
+                      <div class="user">
+                        <label>
+                          <input
+                            type="checkbox"
+                            id="check-only4"
+                            class="check-only"
+                          />
+                          <label for="check-only4" class="label">✓</label>
+                          <div class="avatar">
+                            <img src="./images/noa.png" alt="" />
+                          </div>
+                          <div class="name">测试测试测试</div></label
+                        >
+                      </div>
+                      <div class="user">
+                        <label>
+                          <input
+                            type="checkbox"
+                            id="check-only5"
+                            class="check-only"
+                          />
+                          <label for="check-only5" class="label">✓</label>
+                          <div class="avatar">
+                            <img src="./images/noa.png" alt="" />
+                          </div>
+                          <div class="name">测试测试测试</div></label
+                        >
+                      </div>
+                      <div class="user">
+                        <label>
+                          <input
+                            type="checkbox"
+                            id="check-only6"
+                            class="check-only"
+                          />
+                          <label for="check-only6" class="label">✓</label>
+                          <div class="avatar">
+                            <img src="./images/noa.png" alt="" />
+                          </div>
+                          <div class="name">测试测试测试</div></label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row"><i class="iconfont icon-xiala"></i>家人</div>
+                  <div class="row"><i class="iconfont icon-xiala"></i>同学</div>
+                  <div class="row"><i class="iconfont icon-xiala"></i>群聊</div>
+                </div>
+              </div>
+              <div class="right">
+                <div class="desc" style="font-size: 20px">添加成员</div>
+                <div class="modal-footer">
+                  <button
+                    class="modal-button modal-button-confirm"
+                    onclick="closeModal()"
+                  >
+                    确定
+                  </button>
+                  <button
+                    class="modal-button modal-button-cancel"
+                    onclick="closeModal()"
+                  >
+                    取消
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="chat-area">
@@ -427,10 +578,12 @@
           <div class="aside">
             <div class="member-info">
               <div class="num">群成员 12</div>
-              <div class="icon"><i class="iconfont icon-search"></i></div>
+              <div class="icon" onclick="addMember()">
+                <i class="iconfont icon-search"></i>
+              </div>
             </div>
-            <div class="member-list">
-              <div class="member">
+            <div class="member-list" id="memberList">
+              <div class="member" oncontextmenu="rightPanel(event)">
                 <div class="avatar"><img src="images/noa.png" alt="" /></div>
                 <div class="name">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -443,85 +596,98 @@
               <div class="member">
                 <div class="avatar"><img src="images/noa.png" alt="" /></div>
                 <div class="name">test</div>
-                <div class="status">群主</div>
+                <div class="status manager">管理员</div>
+              </div>
+              <div class="member">
+                <div class="avatar"><img src="images/noa.png" alt="" /></div>
+                <div class="name">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Accusantium, distinctio placeat aliquid dolor sunt corrupti
+                  aspernatur dignissimos consequuntur fuga iure tempora
+                  veritatis repudiandae iusto ad aut, incidunt nisi blanditiis
+                  ullam.
+                </div>
+                <div class="status manager">管理员</div>
+              </div>
+              <div class="member">
+                <div class="avatar"><img src="images/noa.png" alt="" /></div>
+                <div class="name">test333</div>
+                <div class="status manager">管理员</div>
+              </div>
+              <div class="member">
+                <div class="avatar"><img src="images/noa.png" alt="" /></div>
+                <div class="name">test2222</div>
+                <div class="status manager">管理员</div>
               </div>
               <div class="member">
                 <div class="avatar"><img src="images/noa.png" alt="" /></div>
                 <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
-              </div>
-              <div class="member">
-                <div class="avatar"><img src="images/noa.png" alt="" /></div>
-                <div class="name">test</div>
-                <div class="status">群主</div>
               </div>
             </div>
           </div>
+          <div class="more" id="aside">
+            <div class="name">群聊名称</div>
+            <input type="text" class="aside-input" value="test" />
+            <div class="name">我的本群昵称</div>
+            <input type="text" class="aside-input" value="test" />
+            <div class="name">群聊备注</div>
+            <input type="text" class="aside-input" placeholder="填写备注" />
+            <div class="check-box">
+              <div>
+                <div class="text">设为置顶</div>
+                <div class="checkbox">
+                  <input type="checkbox" class="switch" id="switch-checkbox1" />
+                  <label for="switch-checkbox1" class="switch-checkbox"></label>
+                </div>
+              </div>
+              <div>
+                <div class="text">消息免打扰</div>
+                <div class="checkbox">
+                  <input type="checkbox" class="switch" id="switch-checkbox" />
+                  <label for="switch-checkbox" class="switch-checkbox"></label>
+                </div>
+              </div>
+            </div>
+            <div class="ban">
+              <div>
+                <div class="text">全体禁言</div>
+                <div class="checkbox">
+                  <input type="checkbox" class="switch" id="switch-checkbox3" />
+                  <label for="switch-checkbox3" class="switch-checkbox"></label>
+                </div>
+              </div>
+            </div>
+            <div class="delete">删除聊天记录</div>
+            <div class="delete">解散群聊</div>
+            <div class="delete">转让群聊</div>
+            <div class="spec">被骚扰了？举报该群</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu" id="menu">
+        <div class="group">
+          <div>发送消息</div>
+        </div>
+        <div class="group">
+          <div>@TA</div>
+        </div>
+        <div class="group">
+          <div>查看资料</div>
+        </div>
+        <div class="group">
+          <div>添加好友</div>
+        </div>
+        <div class="group">
+          <div>修改群昵称</div>
+        </div>
+        <div class="group">
+          <div>移除本群</div>
+        </div>
+        <div class="group">
+          <div>举报</div>
+        </div>
+        <div class="group">
+          <div>设置群内禁言></div>
         </div>
       </div>
     </div>

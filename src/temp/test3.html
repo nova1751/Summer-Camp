@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       /* 模态框的容器 */
       .modal {
         position: fixed;
@@ -23,14 +28,13 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 50%;
-        max-width: 520px;
-        max-height: calc(100% - 15px);
+        width: 810px;
+        height: 660px;
         overflow: auto;
         background-color: white;
-        border-radius: 2px;
+        border-radius: 10px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        transition: 1s;
+        display: flex;
       }
 
       /* 模态框的头部 */
@@ -106,6 +110,15 @@
         font-size: 16 px;
         cursor: pointer;
       }
+      .left,
+      .right {
+        width: 100%;
+        height: 100%;
+        padding: 30px;
+      }
+      .left {
+        border-right: 1px solid rgb(245, 245, 245);
+      }
     </style>
   </head>
   <body>
@@ -113,22 +126,9 @@
     <div class="modal" id="myModal">
       <!-- 模态框的内容 -->
       <div class="modal-dialog">
-        <!-- 模态框的头部 -->
-        <div class="modal-header">
-          <span>模态框标题</span>
-          <button class="modal-close" onclick="closeModal()">×</button>
-        </div>
-
-        <!-- 模态框的主体 -->
-        <div class="modal-body">
-          <p>这是一个模仿element-plus的模态框。</p>
-          <p>它只用了html和css，没有用JavaScript和Vue。</p>
-          <p>所以它可能不会完全一样，也没有交互功能。</p>
-          <p>这只是一个演示，您可以根据自己的需求来修改样式和内容。</p>
-        </div>
-
-        <!-- 模态框的底部 -->
-        <div class="modal-footer">
+        <div class="left"></div>
+        <div class="right"></div>
+        <!-- <div class="modal-footer">
           <button
             class="modal-button modal-button-cancel"
             onclick="closeModal()"
@@ -141,7 +141,7 @@
           >
             确定
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
 
