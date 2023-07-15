@@ -51,6 +51,7 @@
     };
     // 当哈希值发生改变，即 haschange 事件触发的时候，进行处理
     const handleNav = () => {
+      console.log("hashchange事件触发了");
       // 获取当前的路径，注意需要去除 # 号
       const route = window.location.hash.slice(1);
       // 获取路由信息并尝试展示

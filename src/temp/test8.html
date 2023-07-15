@@ -60,7 +60,6 @@
 
       // 处理页面导航
       function handleNavigation() {
-        console.log(window);
         const route = window.location.hash.slice(1);
         getContent(route)
           .then((content) => updateContent(content))

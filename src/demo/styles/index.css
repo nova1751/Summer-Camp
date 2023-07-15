@@ -664,7 +664,7 @@ body {
 }
 .chat-room .chat-area .chat .msg .msg-left .bubble img {
   width: 100%;
-  display: block;
+  vertical-align: middle;
 }
 .chat-room .chat-area .chat .msg .msg-right {
   align-self: flex-end;
@@ -702,7 +702,7 @@ body {
 }
 .chat-room .chat-area .chat .msg .msg-right .bubble img {
   width: 100%;
-  display: block;
+  vertical-align: middle;
 }
 .chat-room .chat-area .chat .resize {
   height: 4px;

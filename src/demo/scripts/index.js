@@ -116,22 +116,42 @@ editor.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         // 13 是 Enter 键的编码
         if (e.ctrlKey) {
+            e.preventDefault();
             // 如果同时按下了 Ctrl 键
             // 在光标处插入一个换行符
             let br = document.createElement("br");
+            // br.innerHTML = `<br />`;
             let selection = window.getSelection();
+            // console.log(selection);
             if (selection && selection.rangeCount > 0) {
+                // console.log(selection, selection.getRangeAt(0));
                 let range = selection.getRangeAt(0);
+                // console.log(range);
+                // console.log(selection);
+                range.deleteContents();
+                if (!editor.innerHTML) {
+                    editor.appendChild(br.cloneNode(true));
+                }
                 range.insertNode(br);
-                // 将光标移动到换行符后面
+                // console.log(range.startOffset, range.endOffset);
+                // console.log(editor.childNodes[range.startOffset]);
+                // 获取偏移量
+                // let offset = range.startOffset;
+                // // 插入新节点
+                // editor.insertBefore(br, editor.childNodes[offset]);
+                // const div = range.commonAncestorContainer.parentNode as HTMLDivElement;
+                // div.insertAdjacentElement("afterend", br);
+                // 将光标移动到换行符后面,设置 range 起点与终点的位置
                 range.setStartAfter(br);
-                range.setEndAfter(br);
-                selection.removeAllRanges();
-                selection.addRange(range);
+                console.log(range.collapsed);
+                // range.setEndAfter(br);
+                // range.collapse(true);
+                // selection.removeAllRanges();
+                // selection.addRange(range);
+                editor.scrollTop = editor.scrollHeight;
             }
-            console.log("test1");
+            // console.log("test1");
             // 阻止默认行为，即不在 div 外面插入一个换行符
-            e.preventDefault();
         }
         else if (e.shiftKey || e.altKey) {
             // 如果同时按下了 Shift 或 Alt 键
@@ -143,7 +163,7 @@ editor.addEventListener("keydown", (e) => {
             // 清空 div 内容
             let div = document.createElement("div");
             div.className = "msg-right";
-            let template = `             
+            let template = `
       <div class="bubble">
         <div class="text">${editor.innerHTML}</div>
       </div>
@@ -152,13 +172,19 @@ editor.addEventListener("keydown", (e) => {
       </div>
    `;
             div.innerHTML = template;
-            console.log(div);
+            // console.log(div);
             msg.appendChild(div);
             editor.innerHTML = "";
             // 阻止默认行为，即不在 div 外面插入一个换行符
             e.preventDefault();
             msg.scrollTop = msg.scrollHeight;
         }
+    }
+});
+editor.addEventListener("keyup", () => {
+    var _a;
+    if (((_a = editor.lastChild) === null || _a === void 0 ? void 0 : _a.nodeName.toLowerCase()) != "br") {
+        editor.appendChild(document.createElement("br"));
     }
 });
 sendMsg.addEventListener("click", () => {
@@ -258,18 +284,15 @@ const addMember = () => {
         const node = document.createElement("div");
         node.classList.add("member");
         node.innerHTML = template;
-        // console.log(node);
+        node.addEventListener("contextmenu", rightPanel);
         memberListNode.appendChild(node);
     });
-    bindEvent();
+    // bindEvent();
 };
 const menu = document.querySelector("#menu");
 const func = (e) => {
-    if (e.target !== menu) {
-        menu.style.display = "none";
-        document.removeEventListener("click", func);
-        // console.log(2);
-    }
+    menu.style.display = "none";
+    document.removeEventListener("click", func);
 };
 const rightPanel = (e) => {
     e.preventDefault();
@@ -296,9 +319,11 @@ const rightPanel = (e) => {
 menu.addEventListener("click", (e) => {
     e.stopPropagation();
 });
-const bindEvent = () => {
-    const memberItems = document.querySelectorAll(".member");
-    memberItems.forEach((item) => {
-        item.addEventListener("contextmenu", rightPanel);
-    });
-};
+// const bindEvent = () => {
+//   const memberItems = document.querySelectorAll(
+//     ".member"
+//   ) as NodeListOf<HTMLDivElement>;
+//   memberItems.forEach((item) => {
+//     item.addEventListener("contextmenu", rightPanel);
+//   });
+// };

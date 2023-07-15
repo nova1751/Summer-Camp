@@ -49,9 +49,9 @@
       const app = document.querySelector("#content");
       app.innerHTML = content;
     };
-    // 当哈希值发生改变，即 haschange 事件触发的时候，进行处理
+    // popstate 事件触发的时候，进行处理
     const handleNav = (pathname) => {
-      // 获取当前的路径，注意需要去除 # 号
+      // 为空则为 '/'
       const route = pathname || "/";
       // 获取路由信息并尝试展示
       getContent(route).then(
@@ -64,7 +64,6 @@
       );
     };
     window.onpopstate = handleNav(window.location.pathname);
-    handleNav();
 
     // 拦截连接跳转事件
     const navLinks = document.querySelectorAll("nav a");
