@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lazy Loading Example</title>
+    <style>
+      img {
+        width: 300px;
+        height: 300px;
+        margin: 1000px 0;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Lazy Loading Example</h1>
+    <p>Scroll down to see the images load</p>
+    <!-- 使用占位图作为图片的src属性，使用data-src属性存储真实的图片地址 -->
+    <img
+      src="placeholder.png"
+      data-src="../demo/images/CHR_000001_00_l.png"
+      alt="Image 1"
+    />
+    <img
+      src="placeholder.png"
+      data-src="../demo/images/CHR_000001_00_l.png"
+      alt="Image 2"
+    />
+    <img
+      src="placeholder.png"
+      data-src="../demo/images/CHR_000002_00_l.png"
+      alt="Image 3"
+    />
+    <img
+      src="placeholder.png"
+      data-src="../demo/images/CHR_000002_00_l.png"
+      alt="Image 4"
+    />
+    <img
+      src="placeholder.png"
+      data-src="../demo/images/CHR_000003_00_l.png"
+      alt="Image 5"
+    />
+    <script>
+      // 获取所有的图片元素
+      const images = document.querySelectorAll("img");
+
+      // 创建一个IntersectionObserver对象，传入一个回调函数和一个配置对象
+      const observer = new IntersectionObserver(
+        (entries) => {
+          console.log("test");
+          // 遍历每个相交信息
+          entries.forEach((entry) => {
+            // 如果目标元素与视口相交
+            if (entry.isIntersecting) {
+              // 获取目标元素
+              const image = entry.target;
+              // 获取目标元素的data-src属性值
+              const src = image.getAttribute("data-src");
+              // 如果data-src属性值存在
+              if (src) {
+                // 把它赋值给src属性，加载真实的图片地址
+                image.setAttribute("src", src);
+                // 移除data-src属性，避免重复加载
+                image.removeAttribute("data-src");
+              }
+              // 停止观察目标元素，节省性能
+              observer.unobserve(image);
+            }
+          });
+        },
+        {
+          // 配置对象，指定根元素为视口，阈值为0.1
+          root: null,
+          threshold: 0.1,
+        }
+      );
+
+      // 对每个图片元素调用observe方法，开始观察它们
+      images.forEach((image) => {
+        observer.observe(image);
+      });
+    </script>
+  </body>
+</html>

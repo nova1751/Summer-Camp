@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 300px;
+        height: 300px;
+        overflow: scroll;
+        border: 1px solid black;
+      }
+
+      #list {
+        position: relative;
+        width: 100%;
+      }
+
+      .item {
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-bottom: 1px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="list"></div>
+    </div>
+    <script>
+      let data = [];
+      for (let i = 0; i < 10000; i++) {
+        data.push("Item " + (i + 1));
+      }
+
+      let container = document.getElementById("container");
+      let list = document.getElementById("list");
+
+      let itemHeight = 30;
+      let containerHeight = container.clientHeight;
+      let bufferCount = Math.ceil(containerHeight / itemHeight);
+
+      let start = 0;
+      let end = start + bufferCount * 2;
+      let scrollTop = 0;
+
+      function initList() {
+        list.style.height = data.length * itemHeight + "px";
+        renderList();
+        container.addEventListener("scroll", onScroll);
+      }
+
+      function renderList() {
+        list.innerHTML = "";
+        let fragment = document.createDocumentFragment();
+        for (let i = start; i < end; i++) {
+          let item = document.createElement("div");
+          item.className = "item";
+          item.textContent = data[i];
+          fragment.appendChild(item);
+        }
+        list.appendChild(fragment);
+        list.style.transform = `translate(0,${start * itemHeight}px)`;
+      }
+      // 调整起点和终点的值
+      function onScroll() {
+        scrollTop = container.scrollTop;
+        start = Math.floor(scrollTop / itemHeight) - bufferCount;
+        if (start < 0) {
+          start = 0;
+        }
+        end = start + bufferCount * 2;
+        if (end > data.length) {
+          end = data.length;
+        }
+        renderList();
+      }
+
+      initList();
+    </script>
+  </body>
+</html>

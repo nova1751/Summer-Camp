@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinite Scrolling Example</title>
+    <style>
+      .container {
+        max-width: 800px;
+        margin: auto;
+      }
+
+      .post {
+        border: 1px solid gray;
+        padding: 20px;
+        margin: 20px;
+      }
+
+      .loading {
+        text-align: center;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Infinite Scrolling Example</h1>
+    <!-- 创建一个容器元素，用来存放内容 -->
+    <div class="container">
+      <!-- 创建一个占位元素，用来触发无限滚动 -->
+      <div id="sentinel"></div>
+      <!-- 创建一个加载提示元素 -->
+      <div class="loading">Loading...</div>
+    </div>
+
+    <script>
+      // 获取容器元素和占位元素
+      const container = document.querySelector(".container");
+      const sentinel = document.querySelector("#sentinel");
+
+      // 定义一个变量，用来存储当前加载的页数
+      let page = 1;
+
+      // 定义一个函数，用来模拟从服务器获取数据
+      function getData(page) {
+        // 返回一个Promise对象，用来异步处理数据
+        return new Promise((resolve, reject) => {
+          // 使用setTimeout模拟网络延迟
+          setTimeout(() => {
+            // 使用fetch API请求一个随机用户生成器的API，传入页数参数
+            fetch(`https://randomuser.me/api/?page=${page}&results=10`)
+              .then((response) => response.json()) // 把响应转换为JSON格式
+              .then((data) => resolve(data.results)) // 把数据传给resolve函数
+              .catch((error) => reject(error)); // 如果出错，把错误传给reject函数
+          }, 1000);
+        });
+      }
+
+      // 定义一个函数，用来渲染数据到页面上
+      function renderData(data) {
+        // 遍历数据数组
+        data.forEach((item) => {
+          // 创建一个div元素，用来存放每个用户的信息
+          const post = document.createElement("div");
+          // 给div元素添加post类名
+          post.classList.add("post");
+          // 给div元素添加内容，使用模板字符串插入用户的姓名、邮箱和头像等信息
+          post.innerHTML = `
+          <h2>${item.name.first} ${item.name.last}</h2>
+          <p>${item.email}</p>
+          <img src="${item.picture.large}" alt="${item.name.first}">
+        `;
+          // 把div元素插入到容器元素的最后一个子元素之前，也就是占位元素之前
+          container.insertBefore(post, sentinel);
+        });
+      }
+
+      // 创建一个IntersectionObserver对象，传入一个回调函数和一个配置对象
+      const observer = new IntersectionObserver(
+        (entries) => {
+          // 如果占位元素与视口相交
+          if (entries[0].isIntersecting) {
+            // 调用getData函数，传入当前的页数，获取数据
+            getData(page)
+              .then((data) => {
+                // 调用renderData函数，渲染数据到页面上
+                renderData(data);
+                // 页数加一，准备下一次加载
+                page++;
+              })
+              .catch((error) => {
+                // 如果出错，打印错误信息
+                console.error(error);
+              });
+          }
+        },
+        {
+          // 配置对象，指定根元素为视口，阈值为1
+          root: null,
+          threshold: 1,
+        }
+      );
+
+      // 调用observe方法，传入占位元素，开始观察它
+      observer.observe(sentinel);
+    </script>
+  </body>
+</html>

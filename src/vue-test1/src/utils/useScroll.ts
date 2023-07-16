@@ -13,8 +13,13 @@ const useScroll = (el: target) => {
   // 获取 x , y 坐标
   const position: ScrollPosition = { x: ref(0), y: ref(0) }
   const handleScroll = () => {
-    position.x.value = window.scrollX
-    position.y.value = window.scrollY
+    if (el instanceof Window) {
+      position.x.value = el.scrollX
+      position.y.value = el.scrollY
+    } else {
+      position.x.value = el.scrollLeft
+      position.y.value = el.scrollTop
+    }
   }
   onMounted(() => {
     el.addEventListener('scroll', handleScroll)
