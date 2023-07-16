@@ -55,7 +55,7 @@ git commit test.txt -m 'test'
 > 有一些附加参数如下
 >
 > - `-a`：显示本地分支和远程分支。
-> - `-m | -M`：重命名当前分支，`-M`为强制重命名，即使名称已存在会强制覆盖掉远程名称。
+> - `-m | -M`：重命名当前分支，`-M`为强制重命名，即使名称已存在会强制覆盖掉分支名称。
 > - `-d | -D`：删除分支，`-D`强制删除。
 > - `-v | -vv`：显示本地分支最后一次提交记录，`-vv`显示本地分支与远程分支的关联。
 
@@ -68,6 +68,8 @@ git branch -a
 git branch -d test
 # 显示本地分支与远程分支的关联
 git branch -vv
+# 将本地的 dev 分支重命名为 develop 分支
+git branch -m dev develop
 ```
 
 #### status
@@ -108,7 +110,7 @@ git merge --abort
 git switch dev
 # 创建一个新的分支 feature 并从 dev 分支进行开发
 git switch -c feature dev
-# 检查某个提交的状态
+# 检查某个提交的状态，可以尝试在这个状态下新建一个分支解决问题
 git switch --detach HEAD~2
 # 切换到孤儿分支 docs
 git switch --orphan docs
