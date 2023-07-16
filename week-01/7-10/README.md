@@ -73,6 +73,7 @@ git branch -vv
 #### status
 
 > 基本格式为：`git status`
+> 快速合并的时候是不会生成提交记录的
 
 ```bash
 git status
@@ -197,7 +198,6 @@ git pull origin main
 git pull origin dev:my-dev
 # 使用 rebase 选项来拉取代码，在远程库的基础上应用本地更改，不会额外生成合并提交
 git pull --rebase origin main
-
 ```
 
 #### checkout
@@ -270,6 +270,26 @@ git remote rename upstream source
 git remote rm source
 ```
 
+#### cherry-pick
+
+> 基本格式为`git cherry-pick <commitHash>`
+>
+> - `git cherry-pick <commitHash>`：将某一提交应用到当前分支。
+> - `git cherry-pick <branchname>`：将某一分支的最新提交应用到当前分支
+> - `git cherry-pick <HashA> <HashB>`：将多个提交应用到当前分支
+>
+> 选项：
+>
+> - `-x`:在提交信息的末尾追加一行`(cherry picked from commit ...)`，方便以后查到这个提交是如何产生的。
+> - `-s，--signoff`：在提交信息的末尾追加一行操作者的签名，表示是谁进行了这个操作。
+
+```bash
+# 转移 A 到 B 之间的提交，不包括 A
+git cherry-pick A..B
+# 转移 A 到 B 之间的提交，包括 A
+git cherry-pick A^..B
+```
+
 ### Git 使用技巧
 
 #### 查看本地分支与远程分支的关联
@@ -282,10 +302,13 @@ git remote show origin
 #### 将本地分支与远程分支关联
 
 ```bash
+# 本地创建了分支而远程没有
 git push -u origin main
 git push --set-upstream origin main
+# 远程创建了分支而本地没有
 git checkout -b dev origin/dev
 git checkout --track origin/dev
+# 远程分支与本地分支都有
 git branch --set-upstream-to=origin/dev
 ```
 
@@ -302,6 +325,13 @@ git log
 ```
 
 #### 如何修改 git commit 信息
+
+> `vim`编辑器的使用
+>
+> - 按下`i`键，进入插入模式，可以修改提交信息。
+> - 按下`Esc`键，退出插入模式，回到命令模式。
+> - 在命令模式下，输入`:wq`，保存并退出编辑界面。
+> - 在命令模式下，输入`:q!`，放弃修改并退出编辑界面。
 
 ```bash
 git commit --amend
