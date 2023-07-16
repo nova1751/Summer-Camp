@@ -75,7 +75,6 @@ git branch -m dev develop
 #### status
 
 > 基本格式为：`git status`
-> 快速合并的时候是不会生成提交记录的
 
 ```bash
 git status
@@ -84,6 +83,7 @@ git status
 #### merge
 
 > 基本格式为：`git merge <branchname>`。
+> 快速合并的时候是不会生成提交记录的
 
 ```bash
 # 合并 dev 分支
@@ -91,6 +91,9 @@ git merge dev
 # 合并
 git merge --abort
 ```
+
+> TIP:
+> 最新提交是合并提交，那么它有两个父提交，分别是合并前的两个分支的最新提交。当你用`git reset --hard HEAD^`回退时，你其实是回退到合并提交的第一个父提交，也就是当前分支合并前的最新提交。这样你就会丢失合并提交和另一个分支的所有修改。如果你想回退到合并提交的第二个父提交，也就是另一个分支合并前的最新提交，你可以用`git reset --hard HEAD^2`，其中`2`表示第二个父提交。
 
 #### switch
 
