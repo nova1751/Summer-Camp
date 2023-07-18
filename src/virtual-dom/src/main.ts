@@ -1,9 +1,8 @@
-import { createElement, insertDOM, render } from "./element";
-let virtualDom = createElement("ul", { class: "list" }, [
-  createElement("li", { class: "item" }, ["Test1"]),
-  createElement("li", { class: "item" }, ["Test2"]),
-  createElement("li", { class: "item" }, ["Test3"]),
+import { VNode } from "./models/VNode";
+let virtualDom = new VNode("ul", { class: "list" }, [
+  new VNode("li", { class: "item" }, ["Test1"]),
+  new VNode("li", { class: "item" }, ["Test2"]),
+  new VNode("li", { class: "item" }, ["Test3"]),
 ]);
-const el = render(virtualDom);
 const app = document.querySelector<HTMLDivElement>("#app")!;
-insertDOM(el, app);
+virtualDom.insert(app);

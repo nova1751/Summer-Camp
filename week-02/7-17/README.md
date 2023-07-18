@@ -3,4 +3,4 @@
 ### 任务完成情况
 
 - [x] 初步认识了`React`与`JSX`的基本语法。
-- [ ] 编写`Virtual Dom`的构造函数。
+- [x] 编写`Virtual Dom`的构造函数。
