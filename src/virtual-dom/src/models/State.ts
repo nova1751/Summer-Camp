@@ -1,6 +1,8 @@
 export enum State {
-  REPLACE,
-  REORDER,
-  PROPS,
-  TEXT,
+  ChangeText,
+  ChangeProps,
+  Insert,
+  Move,
+  Remove,
+  Replace,
 }
