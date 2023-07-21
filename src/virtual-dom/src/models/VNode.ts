@@ -2,7 +2,7 @@
 export type Child = VNode | string;
 // 添加索引签名，避免 for in 使用字符串访问属性的时候报错
 export interface Props {
-  [key: string]: string;
+  [key: string]: any;
 }
 // 虚拟 DOM 元素的类，用来创建和描述 VDOM
 export class VNode {

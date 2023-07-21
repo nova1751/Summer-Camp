@@ -2,7 +2,7 @@ import { VNode, Child, Props } from "../models/VNode";
 import { State } from "../models/State";
 import { Patches, listDiff } from "./listDiff";
 // 定义主 diff 函数
-export const diff = (oldTree: VNode, newTree: VNode) => {
+export const diff = (oldTree: Child, newTree: Child) => {
   const index = 0;
   const patches = {};
   dfsWalk(oldTree, newTree, index, patches);

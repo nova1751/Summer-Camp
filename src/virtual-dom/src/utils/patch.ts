@@ -5,7 +5,7 @@ import { Props, VNode } from "../models/VNode";
 let index = 0;
 const patch = (node: Element, patches: Patches) => {
   let changes = patches[index];
-  let childNodes = Array.from(node.childNodes);
+  let childNodes = node?.childNodes;
   if (changes?.length && patches[index]) {
     changeDom(node as Element, changes);
   }
@@ -28,8 +28,7 @@ const changeDom = (node: Element, changes: any[]) => {
     switch (type) {
       case State.ChangeText:
         console.log("ChangeText");
-
-        node.textContent = change.textContent;
+        node.textContent = change.content;
         break;
       case State.ChangeProps:
         console.log("ChangeProps");
@@ -76,6 +75,17 @@ const changeDom = (node: Element, changes: any[]) => {
           node.replaceChild(cloneFromNode, toNode);
           node.replaceChild(cloneToNode, fromNode);
         });
+        // setTimeout(() => {
+        //   let fromNode = node.childNodes[change.from];
+        //   let toNode = node.childNodes[change.to];
+        //   let anchor = fromNode.nextSibling;
+        //   node.insertBefore(fromNode, toNode);
+        //   if (anchor) {
+        //     node.insertBefore(toNode, anchor);
+        //   } else {
+        //     node.appendChild(toNode);
+        //   }
+        // });
         break;
       default:
         break;

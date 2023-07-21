@@ -3,15 +3,17 @@ import { parser, test } from "./models/jsx";
 import { diff } from "./utils/diff";
 import patch from "./utils/patch";
 // let virtualDom = new VNode("ul", { class: "list" }, [
-//   new VNode("li", { class: "item" }, ["Test1"], 1),
-//   new VNode("li", { class: "item" }, ["Test2"], 2),
-//   new VNode("li", { class: "item" }, ["Test3"], 3),
+//   new VNode("li", { class: "item", key: 1 }, ["Test1"]),
+//   new VNode("li", { class: "item", key: 2 }, ["Test2"]),
+//   new VNode("li", { class: "item", key: 3 }, ["Test3"]),
 // ]);
 // let virtualDom0 = new VNode("ul", { class: "list" }, [
-//   new VNode("li", { class: "item" }, ["Test33"], 3),
-//   new VNode("li", { class: "item" }, ["Test2"], 2),
-//   new VNode("li", { class: "item" }, ["Test1"], 1),
+//   new VNode("li", { class: "item", key: 3 }, ["Test33"]),
+//   new VNode("li", { class: "item", key: 2 }, ["Test2"]),
+//   new VNode("li", { class: "item", key: 1 }, ["Test1"]),
 // ]);
+// let virtualDom = "sssssssss";
+// let virtualDom0 = "qqqqqqqq";
 const variables = {
   propName: "title",
   app: "app111",
@@ -20,6 +22,7 @@ const variables = {
 const virtualDom = parser(
   `
 <ul>
+  test000
   <li class="item" key="1">
     <div class="test">asdasdasdasdasdassdasdasda</div>
   </li>
@@ -71,6 +74,7 @@ const virtualDom = parser(
 const virtualDom0 = parser(
   `
 <ul>
+  test111
   <li class="item" key="1">
     <div class="test">asdasdasdasdasdassdasdasda</div>
   </li>
@@ -126,3 +130,8 @@ setTimeout(() => {
   patch(app.childNodes[0] as Element, patches);
 }, 1000);
 virtualDom.insert(app);
+// setTimeout(() => {
+//   patch(app, patches);
+// }, 1000);
+
+// app.innerText = virtualDom;
