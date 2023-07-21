@@ -10,18 +10,18 @@ const createElement = (
 
 // ⽤于解析jsx字符串的函数
 // ⽤于递归解析jsx字符串的函数
-function parser(element: string, variables: Props): VNode {
+export const parser = (element: string, variables: Props): VNode => {
   element = element
     .replace(/[\r\n\t]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+  // console.log(element);
   // ⽤正则表达式匹配标签名，属性和内容，贪婪匹配
   const tagRegex = /<(\w+)(.*?)>([\s\S]*)<\/\1>/;
   const propRegex = /(\w+)=(['"{])(.*?)(['"}])/g;
 
   // 获取标签名，属性和内容
   const tagMatch = element.match(tagRegex)!;
-  // console.log(element, tagMatch);
 
   const tagName = tagMatch[1];
   const propString = tagMatch[2];
@@ -62,7 +62,6 @@ function parser(element: string, variables: Props): VNode {
   //   }
   // }
   // 判断内容是否包含嵌套的标签
-  console.log(content);
 
   if (/<\w+/.test(content)) {
     // 如果包含，就递归地解析每个子标签，并将其添加到子节点数组中
@@ -70,17 +69,18 @@ function parser(element: string, variables: Props): VNode {
     let level = 0;
     for (let i = 0; i < content.length; i++) {
       subElement += content[i];
-      if (content[i + 1] === "<" && content[i + 2] !== "/") {
+      if (content[i] === "<" && content[i + 1] !== "/") {
         if (level === 0) {
           // 添加非空判断
-          if (subElement.trim()) {
-            children.push(subElement.trim());
+          const string = subElement.slice(0, -1).trim();
+          if (string) {
+            children.push(string);
           }
-          subElement = "";
+          subElement = "<";
         }
         level++;
       }
-      if (content[i + 1] === "<" && content[i + 2] === "/") {
+      if (content[i] === "<" && content[i + 1] === "/") {
         level--;
       }
       if (level === 0 && content[i] === ">") {
@@ -96,7 +96,7 @@ function parser(element: string, variables: Props): VNode {
   }
   // 返回构造的VDOM对象
   return createElement(tagName, props, children);
-}
+};
 export const test = () => {
   const variables = {
     propName: "title",
@@ -116,11 +116,58 @@ export const test = () => {
     </div>
     ss
     <div id={ccc}>
-      test  
+      test
     </div>
     test
   </h1>`;
-
+  //   let title = `
+  //   <ul>
+  //   <li class="item" key="1">
+  //     <div class="test">asdasdasdasdasdassdasdasda</div>
+  //   </li>
+  //   <li class="item" key="2">
+  //     test1
+  //     <div class="test">asdasdasdasdasdassdasdasda</div>
+  //   </li>
+  //   <li class="item" key="3">test2</li>
+  //   <li class="item" key="4">test3</li>
+  //   <li class="item" key="5">test4</li>
+  //   <li class="item" key="6">test5</li>
+  //   <li class="item" key="7">test6</li>
+  //   <li class="item" key="8">
+  //     test7
+  //     <div class="test">asdasdasdasdasdassdasdasda</div>
+  //   </li>
+  //   <li class="item" key="9">test8</li>
+  //   <li class="item" key="10">test9</li>
+  //   <li class="item" key="11">
+  //     test10
+  //     <div class="test">asdasdasdasdasdassdasdasda</div>
+  //   </li>
+  //   <li class="item" key="12">test11</li>
+  //   <li class="item" key="13">test12</li>
+  //   <li class="item" key="14">test13</li>
+  //   <li class="item" key="15">test14</li>
+  //   <li class="item" key="16">test15</li>
+  //   <li class="item" key="17">test16</li>
+  //   <li class="item" key="18">test17</li>
+  //   <li class="item" key="19">
+  //     test18
+  //     <div class="test">asdasdasdasdasdassdasdasda</div>
+  //   </li>
+  //   <li class="item" key="20">test19</li>
+  //   <li class="item" key="21">test20</li>
+  //   <li class="item" key="22">test21</li>
+  //   <li class="item" key="23">test12</li>
+  //   <li class="item" key="24">test123</li>
+  //   <li class="item" key="25">test1444</li>
+  //   <li class="item" key="26">test1444</li>
+  //   <li class="item" key="27">test1444</li>
+  //   <li class="item" key="28">test14221</li>
+  //   <li class="item" key="29">test14442</li>
+  //   <li class="item" key="30">test1231</li>
+  // </ul>
+  //   `;
   const vdom = parser(title, variables);
   // console.log(title);
 

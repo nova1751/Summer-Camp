@@ -9,19 +9,18 @@ export class VNode {
   tagName: string;
   props: Props;
   children: Child[];
-  key?: number;
   // 构造函数
-  constructor(tagName: string, props: Props, children: Child[], key?: number) {
+  constructor(tagName: string, props: Props, children: Child[]) {
     this.tagName = tagName;
     this.props = props;
     this.children = children;
-    this.key = key;
   }
+
   // 渲染函数
   render(): HTMLElement {
     let el = document.createElement(this.tagName);
     for (let attr in this.props) {
-      el.setAttribute("attr", this.props[attr]);
+      el.setAttribute(attr, this.props[attr]);
     }
     this.children.forEach((child) => {
       const node =
@@ -36,6 +35,16 @@ export class VNode {
   insert(target: HTMLElement) {
     const el = this.render();
     target.appendChild(el);
+  }
+  count(): number {
+    let count = 0;
+    for (let child of this.children) {
+      if (child instanceof VNode) {
+        count += child.count();
+      }
+      count += 1;
+    }
+    return count;
   }
 }
 

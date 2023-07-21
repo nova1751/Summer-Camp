@@ -22,9 +22,9 @@ const dfsWalk = (
     curPatch.push({ type: State.ChangeText, content: newNode });
   } else if (
     (oldNode as VNode).tagName === (newNode as VNode).tagName &&
-    (newNode as VNode).key === (oldNode as VNode).key
+    (newNode as VNode).props.key === (oldNode as VNode).props.key
   ) {
-    let props = diffProps((newNode as VNode).props, (oldNode as VNode).props);
+    let props = diffProps((oldNode as VNode).props, (newNode as VNode).props);
     if (props.length) curPatch.push({ type: State.ChangeProps, props });
     diffChildren(
       (oldNode as VNode).children,
@@ -83,18 +83,21 @@ const diffChildren = (
       patches[index] = changes;
     }
   }
+  // console.log(index, oldChildren);
 
   let last: Child | null = null;
   oldChildren.forEach((item, i) => {
     if (item instanceof VNode) {
       if (last instanceof VNode)
-        index = last?.children ? index + last.children.length + 1 : index + 1;
+        index = last?.count() ? index + last.count() + 1 : index + 1;
+      else index += 1;
+      // console.log(index);
+
       let key = list.indexOf(oldKeys[i]);
       let node = newChildren[key];
-      console.log(list, oldKeys[i]);
-
       if (node) {
-        // console.log("test");
+        // console.log(item, node, index, patches);
+
         dfsWalk(item, node, index, patches);
       }
     } else {
