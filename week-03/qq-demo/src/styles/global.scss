@@ -1,0 +1,27 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: LXGW WenKai !important;
+  font-weight: bold !important;
+}
+
+a,
+.blue {
+  text-decoration: none;
+  color: var(--el-color-primary);
+  transition: 0.4s;
+}
+html {
+  height: 100%;
+  font-size: 14px;
+}
+body {
+  height: 100%;
+  color: #333;
+  background-image: url('@/assets/images/bg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position-x: center;
+}

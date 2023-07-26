@@ -45,4 +45,7 @@ const open2 = () => {
   <h1 @click="open">我是主页</h1>
   <el-button plain @click="open1"> Closes automatically </el-button>
   <el-button plain @click="open2"> Won't close automatically </el-button>
+  <IEpMinus />
+  <IEpPlus />
+  <i-ep-plus />
 </template>
