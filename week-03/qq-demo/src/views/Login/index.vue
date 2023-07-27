@@ -9,10 +9,6 @@ const userInfo = ref<userFormData>({
   username: userStore.userInfo?.username!,
   password: ''
 })
-// 定义头像
-const avatarUrl = userStore.userInfo?.avatar
-  ? 'http://127.0.0.1:8888' + userStore.userInfo.avatar
-  : null
 // 准备数据对象
 const rules = {
   username: [
@@ -55,8 +51,8 @@ const resetForm = () => {
   <div class="login-right-layout">
     <div class="login-box">
       <div class="welcome-title">
-        <div class="avatar" v-if="avatarUrl">
-          <img :src="avatarUrl" alt="" />
+        <div class="avatar" v-if="userStore.userInfo?.avatar">
+          <el-avatar :src="userStore.userInfo?.avatar" :size="72" />
         </div>
         <h1>登录到 WebChat</h1>
       </div>
@@ -131,10 +127,6 @@ const resetForm = () => {
       border-radius: 50%;
       overflow: hidden;
       flex-shrink: 0;
-      img {
-        width: 100%;
-        height: 100%;
-      }
     }
   }
   .login-box {

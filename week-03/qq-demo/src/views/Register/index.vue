@@ -3,7 +3,6 @@ const router = useRouter()
 import { User, Lock, Check } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import VueImgVerify from '@/components/VueImgVerify.vue'
-import { registerAPI } from '@/apis/user'
 import { useUserStore } from '@/stores/user'
 const userStore = useUserStore()
 const ruleFormRef = ref<FormInstance>()
@@ -130,7 +129,7 @@ const clearForm = (formEl: FormInstance | undefined) => {
         <div class="avatar">
           <img src="../../assets/images/logo.svg" alt="" />
         </div>
-        欢迎注册 WebChat
+        <h1>欢迎注册 WebChat</h1>
       </div>
       <div class="register-box">
         <div class="register-form">

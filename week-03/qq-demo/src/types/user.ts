@@ -20,9 +20,17 @@ interface responseData {
 }
 
 // 定义登录用户返回数据类型
-export interface loginResponseData extends responseData {
+export interface userResponseData extends responseData {
   data: {
     info: UserInfo
     token: string
   }
+}
+// 定义修改数据用户数据类型
+export interface updatedFormData {
+  username: string
+  name: string
+  signature: string
+  phone: string
+  avatar: File
 }

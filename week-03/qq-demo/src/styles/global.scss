@@ -4,6 +4,10 @@
   box-sizing: border-box;
   font-family: LXGW WenKai !important;
   font-weight: bold !important;
+  // 防止字体图标变粗
+  .iconfont {
+    font-weight: normal !important;
+  }
 }
 
 a,
@@ -24,4 +28,18 @@ body {
   background-size: cover;
   background-attachment: fixed;
   background-position-x: center;
+}
+/* 屏幕分辨率放大为 150 */
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 120dpi) {
+  .app-main {
+    transform: scale(0.665, 0.665); /* 缩放数值需要根据效果调试 */
+    transform-origin: left top;
+  }
+}
+/* 屏幕分辨率放大为 125 */
+@media (-webkit-min-device-pixel-ratio: 1.25) {
+  .app-main {
+    transform: scale(0.799, 0.799);
+    transform-origin: left top;
+  }
 }

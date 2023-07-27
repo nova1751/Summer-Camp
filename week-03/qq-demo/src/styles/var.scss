@@ -1,0 +1,158 @@
+// 定义定位的水平垂直居中的混入
+@mixin alignment {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+// 省略文字
+@mixin flex-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+// 滚动条
+@mixin scroll-bar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.01);
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: rgb(205, 205, 205);
+  }
+}
+@mixin msg($align-self: flex-start, $font-color: black, $bg-color: white) {
+  align-self: $align-self;
+  display: flex;
+  max-width: 80%;
+  margin-top: 30px;
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 10px;
+    flex-shrink: 0;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .bubble {
+    border-radius: 5px;
+    background-color: $bg-color;
+    padding: 10px;
+    overflow-wrap: break-word;
+    min-width: 0;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+    // overflow: hidden;
+    display: flex;
+    align-items: center;
+    .text {
+      font-size: 18px;
+      line-height: 24px;
+      overflow: hidden;
+      color: $font-color;
+      // white-space: pre-line;
+    }
+    img {
+      width: 100%;
+      vertical-align: middle;
+    }
+  }
+}
+@mixin search {
+  width: 200px;
+  height: 40px;
+  background-color: $chat-list-grey;
+  border: 1px solid transparent;
+  margin-right: 10px;
+  flex: 1;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  .iconfont {
+    font-size: 30px;
+    color: rgb(147, 147, 147);
+    display: block;
+  }
+  .search-bar1 {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    font-size: 18px;
+    &::placeholder {
+      color: rgb(147, 147, 147);
+    }
+  }
+  &:focus-within {
+    border: 1px solid rgb(0, 153, 255);
+    // box-shadow: 0 0 0 1px rgb(0, 153, 255);
+  }
+  .clear {
+    display: none;
+    .iconfont {
+      color: rgb(170, 170, 170);
+      font-size: 25px;
+      cursor: pointer;
+    }
+  }
+}
+@mixin check {
+  > div {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    .text {
+      font-size: 24px;
+    }
+    &:first-child {
+      border-bottom: 1px solid rgb(245, 245, 245);
+    }
+    .checkbox {
+      width: 48px;
+      height: 24px;
+      .switch {
+        display: none;
+        &:checked {
+          + .switch-checkbox {
+            background-color: rgb(0, 141, 235);
+            &::before {
+              transform: translateX(24px);
+            }
+          }
+        }
+      }
+      .switch-checkbox {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        background-color: rgb(204, 204, 204);
+        padding: 2px;
+        transition: 0.3s;
+        &:before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 20px;
+          background-color: white;
+          border-radius: 50%;
+          transition: 0.3s;
+        }
+      }
+    }
+  }
+}
+$qq-blue: rgb(0, 147, 245);
+$chat-list-grey: rgb(240, 240, 240);
+$border-line: 2px solid rgb(233, 233, 233);
