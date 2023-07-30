@@ -46,7 +46,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
 > TIP:
 > 注意这里获取`offsetWidth`指的是元素的实际宽度而不是样式的宽度，由于`Resize`的界限是通过`min-width`和`min-height`决定的，直接获取样式属性会产生错误。
 
-1. 处理`flex`布局中的溢出问题。
+2. 处理`flex`布局中的溢出问题。
 
    > 对于类似`QQ`这种不需要页面整体滚动的`Web`应用，需要在元素内部添加滚动条，优化整体页面的效果。比较理想的方案是`flex`布局，该布局的伸缩性可以是匹配大部分不同比例的屏幕。然而这种布局却又一些小坑，特别是在复杂嵌套的`flex`布局中，会出现一些莫名其妙溢出，却又没有办法处理的现象。
 
@@ -58,7 +58,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
 
      **解决方案**：分析上述问题的实质在于`flex-item`的容器被内容撑开，导致宽度不受限制，所以对于复杂的嵌套，我们可以直接利用 css 中的计算方法`calc`，设置其宽度或高度为`calc(100vh - 100px)`来达到高度自适应。
 
-2. 文本省略显示。
+3. 文本省略显示。
    > 此种效果实现起来比较简单，主要与上一种处理溢出配合使用。
    ```css
    /* 在父元素宽度确定的情况下，直接三件套 */
@@ -66,7 +66,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
    white-space: nowrap;
    text-overflow: ellipsis;
    ```
-3. 模态框的书写。
+4. 模态框的书写。
 
    > 模态框的实现思路比较简单，即将一个面积覆盖整个页面的定位为`fixed`的`cover`元素，设置`width: 100%;height: 100%`铺满视口，通过控制`display`属性实现模态框的开与关，但模态框的动画效果是一个比较有意思的地方，由于控制原生`css`动画效果只能用于数值类型而不能用于`display`属性，如果想要实现类似的动画效果在模态框消失的时候还是得设置定时器在动画结束的时候设置`display: none;`。
 
@@ -98,7 +98,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
    > };
    > ```
 
-4. `transform`属性实现容器的渐入与渐出
+5. `transform`属性实现容器的渐入与渐出
 
    > 通过动态控制`2D`位移以及过渡，实现类似`QQ`的效果。
 
@@ -114,13 +114,13 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
    transform: translateX(100%)
    ```
 
-5. 纯`css`实现一个漂亮的开关按钮。
+6. 纯`css`实现一个漂亮的开关按钮。
 
    > 这是一个很有意思的东西，通过`checked`伪类来实现开关状态的切换，采用 `2d` 位移与过渡实现类似的效果，并使用`label`标签与`input`关联。采用`:before`伪类实现元素内部按钮。
 
    详细代码可参考[简易 Demo](../src/temp/test7.html)
 
-6. 关于`QQ demo`的一些值得拓展的地方。
+7. 关于`QQ demo`的一些值得拓展的地方。
 
    - `div`的`contenteditable`的属性
 
@@ -207,12 +207,12 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
    2. `js`中创建的`dom`节点加入到`dom`后会保持相同的引用。
    3. 处理绝对定位的元素溢出，父元素设置`overflow`属性必须设置相对定位。
 
-   #### 吸顶交互
+#### 吸顶交互
 
-7. 导航栏吸顶交互
+1. 导航栏吸顶交互
    > 实现这个效果比较简单，对于`window`对象就获取`scrollX scrollY`属性，
    > 对于`div`滚动对象则获取`scrollLeft scrollTop`属性，当滚动到对应的位置的时候，实现动态类名切换达到对应的目的。
-8. 使⽤ js 实现 css 中`scroll-snap-align、scroll-snap-stop、scroll-snap-type`功能。
+2. 使⽤ js 实现 css 中`scroll-snap-align、scroll-snap-stop、scroll-snap-type`功能。
 
    > 使用`js`优化滚动效果在于，监听元素的`scroll`事件，并为其添加防抖函数，只有在滚动结束后才生效。关键在于计算滚动距离，确定最佳滚动位置。
 
@@ -223,7 +223,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
    });
    ```
 
-9. 加载技术
+#### 加载技术
 
 - 图片懒加载
   实现图片懒加载的思路很简单，分三步走，
@@ -249,8 +249,9 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
     - 然后，需要监听容器元素的滚动事件，根据滚动位置和可视区域的高度，计算出当前需要渲染的列表项的范围和偏移量，并将其渲染到容器元素中。
     - 最后，需要对渲染的列表项进行优化，比如使用缓存、节流、防抖等技术来避免频繁的渲染和重绘，提高性能和稳定性。
 
-11. 单页面应用
-1. `SPA`的实现思路
+#### 单页面应用
+
+`SPA`的实现思路
 
 > 访问页面时的应用初始化即为直接通过`url`访问的解决方案。
 > `If the URL doesn't match any static assets, it should serve the same index.html page that your app lives in. Beautiful, again!` --- 摘自 `vue-router` 官方文档。
