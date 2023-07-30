@@ -2,17 +2,21 @@
 import { useUserStore } from '@/stores/user'
 import type { FormInstance } from 'element-plus'
 import { onClickOutside } from '@vueuse/core'
-
+import { UserFilled } from '@element-plus/icons-vue'
 // 定义编程时路由导航
 const router = useRouter()
+const route = useRoute()
 const userStore = useUserStore()
 // 维护图标名称的数组
 const iconTopList = ['icon-chat', 'icon-user']
+const routes = ['/', '/friends']
 const iconBottomList = ['icon-gengduo']
 // 定义顶部当前激活图标索引
-const curIndex = ref(0)
+
+const curIndex = ref(routes.indexOf(route.path))
 const topClickHandler = (i: number) => {
   curIndex.value = i
+  router.push(routes[i])
 }
 const centerDialogVisible = ref(false)
 // 定义一个新的对象收集表单数据
@@ -45,7 +49,7 @@ const formRef = ref<FormInstance>()
 const confirmChange = () => {
   formRef.value?.validate(async (valid) => {
     if (valid) {
-      await userStore.updateUserInfo({
+      const avatarUrl = await userStore.updateUserInfo({
         username: updatedUserInfo.username,
         name: updatedUserInfo.name,
         signature: updatedUserInfo.signature,
@@ -53,6 +57,8 @@ const confirmChange = () => {
         avatar: file!
       })
       userStore.userInfo = { ...updatedUserInfo }
+      userStore.userInfo.avatar = avatarUrl
+      userStore.concatAvatarUrl()
       centerDialogVisible.value = false
     }
   })
@@ -71,7 +77,9 @@ const exit = () => {
 const menu = ref<HTMLDivElement>()
 const menuShow = ref(false)
 const closeMenu = () => {
-  menuShow.value = false
+  setTimeout(() => {
+    menuShow.value = false
+  })
 }
 onClickOutside(menu, closeMenu)
 </script>
@@ -81,7 +89,9 @@ onClickOutside(menu, closeMenu)
     <div class="top">
       <div class="tool">
         <div class="avatar" @click="centerDialogVisible = true">
-          <el-avatar :size="55" :src="userStore.userInfo?.avatar" />
+          <el-avatar :size="55" :src="userStore.userInfo?.avatar">
+            <el-icon :size="24"><UserFilled /></el-icon
+          ></el-avatar>
           <div class="dot">
             <div class="state"></div>
           </div>
@@ -96,11 +106,11 @@ onClickOutside(menu, closeMenu)
     <div class="bottom">
       <div class="tool" v-for="(item, i) in iconBottomList" :key="i">
         <div class="outline">
-          <i class="iconfont" :class="item" @click="menuShow = !menuShow"></i>
+          <i class="iconfont" :class="item" @click="menuShow = true"></i>
         </div>
       </div>
       <div class="menu" ref="menu" v-if="menuShow">
-        <div class="row" @click.stop="exit">退出</div>
+        <div class="row" @click="exit">退出</div>
       </div>
     </div>
     <el-dialog v-model="centerDialogVisible" title="编辑资料" width="480px" align-center>
@@ -176,6 +186,7 @@ onClickOutside(menu, closeMenu)
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  user-select: none;
   // 顶部图标
   .top {
     .tool {
@@ -229,6 +240,7 @@ onClickOutside(menu, closeMenu)
           font-size: 40px;
           display: block;
           color: black;
+          cursor: pointer;
           @include alignment();
           transition: 0.3s;
         }
@@ -260,6 +272,7 @@ onClickOutside(menu, closeMenu)
         display: block;
         color: black;
         @include alignment();
+        cursor: pointer;
         transition: 0.3s;
         &:hover {
           color: $qq-blue;
@@ -279,14 +292,21 @@ onClickOutside(menu, closeMenu)
       bottom: 10px;
       cursor: pointer;
       user-select: none;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      z-index: 1000;
       .row {
         border-radius: 5px;
         text-align: center;
-        height: 20px;
-        line-height: 20px;
+        white-space: nowrap;
+        margin-bottom: 5px;
+        height: 30px;
+        line-height: 30px;
         width: 100%;
         &:hover {
           background-color: rgb(245, 245, 245);
+        }
+        &:last-child {
+          margin-bottom: 0;
         }
       }
     }
@@ -312,6 +332,7 @@ onClickOutside(menu, closeMenu)
         border-radius: 50%;
         background-color: skyblue;
         position: relative;
+        cursor: pointer;
         .modal {
           width: 100%;
           height: 100%;
@@ -325,6 +346,7 @@ onClickOutside(menu, closeMenu)
           left: 0;
           top: 0;
           opacity: 0;
+          transition: 0.3s;
           .iconfont {
             font-size: 40px;
           }

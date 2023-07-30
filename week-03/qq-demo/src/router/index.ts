@@ -6,7 +6,25 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/Home/index.vue')
+      component: () => import('@/views/Home/index.vue'),
+      children: [
+        {
+          path: '',
+          name: 'message',
+          components: {
+            default: () => import('@/views/Home/components/ChatList/components/Message.vue'),
+            chatroom: () => import('@/views/Home/components/ChatRoom/components/Chat.vue')
+          }
+        },
+        {
+          path: 'friends',
+          name: 'friends',
+          components: {
+            default: () => import('@/views/Home/components/ChatList/components/Friends.vue'),
+            chatroom: () => import('@/views/Home/components/ChatRoom/components/Info.vue')
+          }
+        }
+      ]
     },
     {
       path: '/login',

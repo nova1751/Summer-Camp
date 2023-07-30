@@ -1,8 +1,8 @@
 import router from '@/router'
 import { useUserStore } from '@/stores/user'
-export const IPAddress = 'http://127.0.0.1:8888/api/chat/v1'
+export const IPAddress = 'http://127.0.0.1:8888'
 const request = axios.create({
-  baseURL: IPAddress,
+  baseURL: IPAddress + '/api/chat/v1',
   timeout: 5000
 })
 // axios请求拦截器

@@ -14,7 +14,7 @@ export interface UserInfo {
   signature: string
 }
 // 定义通用接口返回数据的 ts 类型
-interface responseData {
+export interface responseData {
   code: number
   message: string
 }

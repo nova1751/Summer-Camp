@@ -46,6 +46,7 @@ export const useUserStore = defineStore(
           type: 'success',
           message: '修改成功'
         })
+        return res.data.avatar
       } else {
         ElMessage({
           type: 'error',
@@ -65,7 +66,8 @@ export const useUserStore = defineStore(
       getUserInfo,
       userRegister,
       updateUserInfo,
-      clearUserInfo
+      clearUserInfo,
+      concatAvatarUrl
     }
   },
   {

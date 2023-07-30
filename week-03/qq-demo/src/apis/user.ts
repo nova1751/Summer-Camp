@@ -16,7 +16,7 @@ export const registerAPI = (data: userFormData) => {
 }
 
 export const updateUserInfoAPI = (data: updatedFormData) => {
-  return request<updatedFormData, userResponseData>({
+  return request<updatedFormData, any>({
     url: API.UPDATEINFO_URL,
     method: 'post',
     data,
