@@ -8,7 +8,8 @@
 
 > 参考设计：`telegram`网页端布局设计。
 > 设计一个宽度或者高度很小的`div`盒子，通过监听这个盒子的`mousedown`事件，动态地添加和移除`mousemove`和`mouseup`事件来改变目标盒子的高度或者宽度。
-> **核心代码**
+
+**核心代码**
 
 ```ts
 // 记录鼠标初始坐标与元素初始宽度
@@ -45,17 +46,19 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
 > TIP:
 > 注意这里获取`offsetWidth`指的是元素的实际宽度而不是样式的宽度，由于`Resize`的界限是通过`min-width`和`min-height`决定的，直接获取样式属性会产生错误。
 
-2. 处理`flex`布局中的溢出问题。
+1. 处理`flex`布局中的溢出问题。
 
    > 对于类似`QQ`这种不需要页面整体滚动的`Web`应用，需要在元素内部添加滚动条，优化整体页面的效果。比较理想的方案是`flex`布局，该布局的伸缩性可以是匹配大部分不同比例的屏幕。然而这种布局却又一些小坑，特别是在复杂嵌套的`flex`布局中，会出现一些莫名其妙溢出，却又没有办法处理的现象。
 
    - 由于`flex-item`的`min-width`由容器内容决定，如果`flex-item`的内容过长，会导致`flex-item`的长度被强制撑开，导致一些滚动条的效果与文字省略的效果无法实现。
+
      **解决方案**：设置该`flex-item`属性`overflow:hidden`或者`min-width:0`，来使该容器宽度固定达到应有的显示效果。
 
    - 第一种方法对于一些嵌套层级比较深的容器不太适合解决问题，应为由于父元素高度的继承问题，使用第一种方法固定子元素高度意味着你需要从外到里一步步调试，判断是那个`flex-item`内容溢出，然后对这个`flex-item`设置对应的属性。比较遗憾的是这种方法十分费时间，并且过程与效果通常让人疑惑。
+
      **解决方案**：分析上述问题的实质在于`flex-item`的容器被内容撑开，导致宽度不受限制，所以对于复杂的嵌套，我们可以直接利用 css 中的计算方法`calc`，设置其宽度或高度为`calc(100vh - 100px)`来达到高度自适应。
 
-3. 文本省略显示。
+2. 文本省略显示。
    > 此种效果实现起来比较简单，主要与上一种处理溢出配合使用。
    ```css
    /* 在父元素宽度确定的情况下，直接三件套 */
@@ -63,7 +66,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
    white-space: nowrap;
    text-overflow: ellipsis;
    ```
-4. 模态框的书写。
+3. 模态框的书写。
 
    > 模态框的实现思路比较简单，即将一个面积覆盖整个页面的定位为`fixed`的`cover`元素，设置`width: 100%;height: 100%`铺满视口，通过控制`display`属性实现模态框的开与关，但模态框的动画效果是一个比较有意思的地方，由于控制原生`css`动画效果只能用于数值类型而不能用于`display`属性，如果想要实现类似的动画效果在模态框消失的时候还是得设置定时器在动画结束的时候设置`display: none;`。
 
@@ -95,7 +98,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
    > };
    > ```
 
-5. `transform`属性实现容器的渐入与渐出
+4. `transform`属性实现容器的渐入与渐出
 
    > 通过动态控制`2D`位移以及过渡，实现类似`QQ`的效果。
 
@@ -111,13 +114,13 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
    transform: translateX(100%)
    ```
 
-6. 纯`css`实现一个漂亮的开关按钮。
+5. 纯`css`实现一个漂亮的开关按钮。
 
    > 这是一个很有意思的东西，通过`checked`伪类来实现开关状态的切换，采用 `2d` 位移与过渡实现类似的效果，并使用`label`标签与`input`关联。采用`:before`伪类实现元素内部按钮。
 
    详细代码可参考[简易 Demo](../src/temp/test7.html)
 
-7. 关于`QQ demo`的一些值得拓展的地方。
+6. 关于`QQ demo`的一些值得拓展的地方。
 
    - `div`的`contenteditable`的属性
 
@@ -206,10 +209,10 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
 
    #### 吸顶交互
 
-8. 导航栏吸顶交互
+7. 导航栏吸顶交互
    > 实现这个效果比较简单，对于`window`对象就获取`scrollX scrollY`属性，
    > 对于`div`滚动对象则获取`scrollLeft scrollTop`属性，当滚动到对应的位置的时候，实现动态类名切换达到对应的目的。
-9. 使⽤ js 实现 css 中`scroll-snap-align、scroll-snap-stop、scroll-snap-type`功能。
+8. 使⽤ js 实现 css 中`scroll-snap-align、scroll-snap-stop、scroll-snap-type`功能。
 
    > 使用`js`优化滚动效果在于，监听元素的`scroll`事件，并为其添加防抖函数，只有在滚动结束后才生效。关键在于计算滚动距离，确定最佳滚动位置。
 
@@ -220,7 +223,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
    });
    ```
 
-10. 加载技术
+9. 加载技术
 
 - 图片懒加载
   实现图片懒加载的思路很简单，分三步走，
@@ -250,7 +253,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
 1. `SPA`的实现思路
 
 > 访问页面时的应用初始化即为直接通过`url`访问的解决方案。
-> If the URL doesn't match any static assets, it should serve the same index.html page that your app lives in. Beautiful, again! -- 摘自 vue-router 官方文档。
+> `If the URL doesn't match any static assets, it should serve the same index.html page that your app lives in. Beautiful, again!` --- 摘自 `vue-router` 官方文档。
 
 - `Hash`模式
   1.  定义路由，定义路由缓存对象。
