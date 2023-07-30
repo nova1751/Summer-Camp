@@ -115,7 +115,7 @@ resize1.addEventListener("mousedown", (e: MouseEvent) => {
 
    > 这是一个很有意思的东西，通过`checked`伪类来实现开关状态的切换，采用 `2d` 位移与过渡实现类似的效果，并使用`label`标签与`input`关联。采用`:before`伪类实现元素内部按钮。
 
-   详细代码可参考[简易 Demo](..\src\temp\test7.html)
+   详细代码可参考[简易 Demo](../src/temp/test7.html)
 
 7. 关于`QQ demo`的一些值得拓展的地方。
 

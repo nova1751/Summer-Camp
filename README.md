@@ -21,9 +21,9 @@
 
 ### 笔记目录
 
-- [Git 笔记](.\week-01\7-10\README.md)(感觉自己写的还不错哟 😊😊😊)
-- [Week1 笔记与总结](.\week-01\README.md)
-- [Week2 笔记与总结](.\week-02\README.md)
+- [Git 笔记](./week-01/7-10/README.md)(感觉自己写的还不错哟 😊😊😊)
+- [Week1 笔记与总结](./week-01/README.md)
+- [Week2 笔记与总结](./week-02/README.md)
 
 ### 整体总结
 
