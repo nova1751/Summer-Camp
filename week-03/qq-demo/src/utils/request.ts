@@ -21,17 +21,13 @@ request.interceptors.request.use(
 // axios响应式拦截器
 request.interceptors.response.use(
   (res) => {
-    if (res.data.code === 401) {
+    if (res.data.code === 4000) {
       ElMessage({
         message: res.data.message,
         type: 'error',
-        duration: 1.5 * 1000,
-        onClose: () => {
-          setTimeout(() => {
-            router.push('/login')
-          }, 1.5 * 1000)
-        }
+        duration: 1.5 * 1000
       })
+      router.push('/login')
     }
     return res.data
   },

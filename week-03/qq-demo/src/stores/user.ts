@@ -57,7 +57,6 @@ export const useUserStore = defineStore(
     }
     // 清空用户数据的函数
     const clearUserInfo = () => {
-      userInfo.value = null
       token.value = null
     }
     return {

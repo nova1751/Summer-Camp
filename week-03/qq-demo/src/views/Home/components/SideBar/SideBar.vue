@@ -41,7 +41,7 @@ const fileUpload = () => {
   const url = file && URL.createObjectURL(file)
   if (url) {
     updatedUserInfo.avatar = url
-    console.log(updatedUserInfo.avatar, userStore.userInfo?.avatar)
+    // console.log(updatedUserInfo.avatar, userStore.userInfo?.avatar)
   }
 }
 // 处理修改信息后的校验逻辑

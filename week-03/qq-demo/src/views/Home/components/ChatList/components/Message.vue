@@ -4,10 +4,10 @@ import { IPAddress } from '@/utils/request'
 import { toggleTime2 } from '@/utils/timeFormat'
 import { useContactStore } from '@/stores/contact'
 const props = defineProps(['keyword'])
-const concatStore = useContactStore()
+const contactStore = useContactStore()
 // 定义消息列表渲染
 const messageList = computed(() =>
-  concatStore.messageList.filter((item) => item.name.includes(props.keyword))
+  contactStore.messageList.filter((item) => item.name.includes(props.keyword))
 )
 // 定义最新消息转化的函数
 const parseMessage = (item: groupMessage | userMessage) => {
@@ -24,8 +24,19 @@ const parseMessage = (item: groupMessage | userMessage) => {
 // 调整不同的点击状态的显示
 // 保存目前的聊天窗口
 const curIndex = ref()
-const handleClick = (i: string) => {
-  curIndex.value = i
+const handleClick = (message: groupMessage | userMessage) => {
+  curIndex.value = message.room
+  contactStore.getMessageList()
+  const curRoom = contactStore.messageList.find((item) => item.room === message.room)!
+  if (curRoom.hasOwnProperty('user_id')) {
+    contactStore.currentRoom.type = 0
+    contactStore.currentRoom.receiver = (message as userMessage).user_id
+  } else {
+    contactStore.currentRoom.type = 1
+    contactStore.currentRoom.group = (message as groupMessage).group_id
+  }
+  contactStore.currentRoom.name = message.name
+  contactStore.currentRoom.room = message.room
 }
 </script>
 
@@ -36,7 +47,7 @@ const handleClick = (i: string) => {
       v-for="(message, i) in messageList"
       :key="message.room"
       :class="{ active: message.room === curIndex }"
-      @click="handleClick(message.room)"
+      @click="handleClick(message)"
     >
       <div class="avatar">
         <el-avatar :size="60" :src="message.avatar ? IPAddress + message.avatar : null">
@@ -67,7 +78,7 @@ const handleClick = (i: string) => {
   user-select: none;
   @include scroll-bar();
   .item {
-    height: 100px;
+    height: 90px;
     padding: 20px;
     display: flex;
     align-items: center;
@@ -93,11 +104,11 @@ const handleClick = (i: string) => {
       justify-content: space-around;
       .name {
         @include flex-ellipsis();
-        font-size: 24px;
+        font-size: 20px;
       }
       .msg {
         @include flex-ellipsis();
-        font-size: 18px;
+        font-size: 16px;
         color: rgb(174, 174, 174);
       }
     }

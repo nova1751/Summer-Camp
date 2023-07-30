@@ -1,14 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Info from './components/Info.vue'
+</script>
 
 <template>
   <div class="container">
-    <router-view name="chatroom"></router-view>
+    <Info></Info>
   </div>
 </template>
 
 <style scoped lang="scss">
 .container {
   height: 100%;
+  width: 100%;
   flex: 1;
   min-width: 580px;
   display: flex;

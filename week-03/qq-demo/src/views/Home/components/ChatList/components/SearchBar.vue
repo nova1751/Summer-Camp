@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { Search, Plus, User, ChatDotRound } from '@element-plus/icons-vue'
+import { Search, Plus, User, ChatDotRound, Picture } from '@element-plus/icons-vue'
 import { friendSearchAPI, addFriendAPI } from '@/apis/friend'
 import { groupSearchAPI, addGroupAPI } from '@/apis/group'
 import type { searchFriend } from '@/types/friend'
+import { getMessageListAPI } from '@/apis/message'
 import type { searchGroupInfo } from '@/types/group'
+import { useContactStore } from '@/stores/contact'
+const concactStore = useContactStore()
 const keyWord = ref('')
 const emit = defineEmits(['update:keyword'])
 // 定义展示工具栏二级菜单的按钮
@@ -43,7 +46,19 @@ const searchFriends = async () => {
 // 定义添加好友的逻辑
 const addFriend = async (data: any) => {
   const res = await addFriendAPI(data)
-  console.log(res)
+  if (res.code === 200) {
+    ElMessage({
+      type: 'success',
+      message: '添加成功'
+    })
+    concactStore.getMessageList()
+    centerDialogVisible.value = false
+  } else {
+    ElMessage({
+      type: 'error',
+      message: '添加失败'
+    })
+  }
 }
 // 定义群聊结果搜索结果的渲染
 const groupsList = ref<searchGroupInfo[]>([])
@@ -67,7 +82,41 @@ const searchGroups = async () => {
 }
 const addGroup = async (data: any) => {
   const res = await addGroupAPI(data)
-  console.log(res)
+  if (res.code === 200) {
+    ElMessage({
+      type: 'success',
+      message: '添加成功'
+    })
+    concactStore.getMessageList()
+    centerDialogVisible.value = false
+  } else {
+    ElMessage({
+      type: 'error',
+      message: '添加失败'
+    })
+  }
+}
+const centerDialogVisible1 = ref(false)
+// 收集创建群聊的信息
+const groupInfo = reactive({
+  avatar: '',
+  name: '',
+  annoucement: '',
+  members: []
+})
+// 定义处理图片上传的逻辑
+let file: File | undefined
+const imgUp = ref<HTMLInputElement | null>()
+const handleImgUpload = () => {
+  imgUp.value?.click()
+}
+const fileUpload = () => {
+  file = imgUp.value?.files?.[0]
+  const url = file && URL.createObjectURL(file)
+  if (url) {
+    groupInfo.avatar = url
+    // console.log(updatedUserInfo.avatar, userStore.userInfo?.avatar)
+  }
 }
 </script>
 <template>
@@ -86,7 +135,7 @@ const addGroup = async (data: any) => {
       @click="menuShow = !menuShow"
     ></el-button>
     <div class="menu" ref="menu" v-if="menuShow">
-      <div class="row">发起群聊</div>
+      <div class="row" @click="centerDialogVisible1 = true">发起群聊</div>
       <div class="row" @click="addContact">加好友/群</div>
     </div>
 
@@ -148,6 +197,68 @@ const addGroup = async (data: any) => {
         </el-tab-pane>
       </el-tabs>
     </el-dialog>
+    <!-- <el-dialog v-model="centerDialogVisible1" title="编辑资料" width="480px" align-center>
+      <div class="container">
+        <div class="avatar" @click="handleImgUpload">
+          <el-avatar :icon="Picture" :size="120"></el-avatar>
+          <div class="modal">
+            <i class="iconfont icon-camera"></i>
+          </div>
+          <input
+            type="file"
+            accept="image/*"
+            ref="imgUp"
+            style="display: none"
+            @change="fileUpload"
+          />
+        </div>
+        <el-form
+          :model="updatedUserInfo"
+          :rules="rules"
+          label-width="72px"
+          label-position="left"
+          ref="formRef"
+        >
+          <el-form-item label="用户名">
+            <el-input v-model="updatedUserInfo.username" disabled></el-input>
+          </el-form-item>
+          <el-form-item label="昵称">
+            <el-input
+              v-model="updatedUserInfo.name"
+              maxlength="36"
+              type="text"
+              show-word-limit
+              placeholder="暂无昵称"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="个签">
+            <el-input
+              v-model="updatedUserInfo.signature"
+              maxlength="80"
+              type="text"
+              placeholder="暂无个性签名"
+              show-word-limit
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="电话" prop="phone">
+            <el-input
+              v-model="updatedUserInfo.phone"
+              type="tel"
+              placeholder="暂无电话号码"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="创建时间">
+            <el-input v-model="updatedUserInfo.created_at" disabled></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="centerDialogVisible1 = false">取消</el-button>
+          <el-button type="primary" @click="confirmChange">保存</el-button>
+        </span>
+      </template>
+    </el-dialog> -->
   </div>
 </template>
 <style scoped lang="scss">

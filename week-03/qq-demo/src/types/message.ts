@@ -27,3 +27,13 @@ export interface userMessage {
 export interface messageListData extends responseData {
   data: (groupMessage | userMessage)[]
 }
+export interface privateMessage {
+  sender_id: number
+  receiver_id: number
+  content: string
+  room: string
+  avatar: string
+  type: string
+  file_size: null
+  created_at: string
+}

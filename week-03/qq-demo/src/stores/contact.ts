@@ -9,6 +9,20 @@ export const useContactStore = defineStore('contact', () => {
     type: null,
     id: null
   })
+  // 定义当前的聊天室
+  const currentRoom = ref<{
+    type: number | null
+    room: string | null
+    receiver: number | null
+    group: number | null
+    name: string | null
+  }>({
+    type: null,
+    room: null,
+    receiver: null,
+    group: null,
+    name: null
+  })
   const getMessageList = async () => {
     const res = await getMessageListAPI()
     if (res.code === 200) {
@@ -26,6 +40,7 @@ export const useContactStore = defineStore('contact', () => {
     messageList,
     friendList,
     groupList,
+    currentRoom,
     getMessageList
   }
 })

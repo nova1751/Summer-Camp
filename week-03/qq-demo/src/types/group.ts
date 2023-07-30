@@ -14,3 +14,23 @@ export interface addGroupResData extends responseData {
     room: string
   }
 }
+export interface groupMember {
+  user_id: string
+  avatar: string
+  name: string
+  nickname: string
+  created_at: string
+  lastMessageTime: string
+}
+export interface groupInfo extends responseData {
+  data: {
+    id: number
+    name: string
+    creator_id: number
+    avatar: string
+    announcement: string
+    room: string
+    created_at: string
+    members: groupMember[]
+  }
+}

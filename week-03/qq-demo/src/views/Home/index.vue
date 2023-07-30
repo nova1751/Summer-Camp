@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import SideBar from './components/SideBar/SideBar.vue'
 import ChatList from './components/ChatList/ChatList.vue'
-import ChatRoom from './components/ChatRoom/ChatRoom.vue'
 </script>
 
 <template>
   <div class="container">
     <SideBar />
     <ChatList />
-    <ChatRoom />
+    <router-view name="chatroom"></router-view>
   </div>
 </template>
 

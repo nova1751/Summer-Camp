@@ -21,7 +21,7 @@ const router = createRouter({
           name: 'friends',
           components: {
             default: () => import('@/views/Home/components/ChatList/components/Friends.vue'),
-            chatroom: () => import('@/views/Home/components/ChatRoom/components/Info.vue')
+            chatroom: () => import('@/views/Home/components/ChatRoom/ChatRoom.vue')
           }
         }
       ]
