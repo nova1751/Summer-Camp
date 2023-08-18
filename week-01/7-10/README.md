@@ -70,6 +70,10 @@ git branch -d test
 git branch -vv
 # 将本地的 dev 分支重命名为 develop 分支
 git branch -m dev develop
+# 将已存在的本地分支与已存在的远程分支相关联
+git branch -u origin/dev
+# 取消本地分支与远程分支的关联
+git branch --unset-upstream
 ```
 
 #### status
@@ -181,14 +185,16 @@ git merge origin/main
 > 基本格式为：`git push <remote> <branch>`
 
 ```bash
-# 推送所有分支
+# 推送所有分支，将当前分支推送远程仓库的同名分支
 git push -a origin
 # 推送标签
 git push --tags origin
-# 强制推送
+# 强制推送，将本地的 main 分支推送到远程仓库的 main 分支上
 git push -f origin main
 # 删除远程仓库的 feature 分支
 git push origin --delete feature
+# 将本地仓库的 master 分支推送到远程仓库的 dev 分支上
+git push origin master:dev
 ```
 
 #### pull
@@ -273,6 +279,10 @@ git remote set-url origin git@github.com:tianqixin/runoob-git-test.git
 git remote rename upstream source
 # 删除远程库
 git remote rm source
+# 列出当前仓库中已配置的所有远程仓库的名称和 URL
+git remote -v
+# 本地仓库中删除过时的远程分支引用的
+git remote prune origin
 ```
 
 #### cherry-pick
@@ -315,6 +325,10 @@ git checkout -b dev origin/dev
 git checkout --track origin/dev
 # 远程分支与本地分支都有
 git branch --set-upstream-to=origin/dev
+
+
+# 取消本地分支与远程分支的关联
+git branch --unset-upstream
 ```
 
 #### 如何回退版本
