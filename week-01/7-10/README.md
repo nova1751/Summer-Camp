@@ -377,3 +377,12 @@ git merge upstream1/main
 # 删除远程仓库的 feature 分支
 git push origin --delete feature
 ```
+
+#### 设置代理
+
+```bash
+# 设置代理
+git config --global http.proxy http://127.0.0.1:7890
+# 取消代理
+git config --global --unset http.proxy
+```
