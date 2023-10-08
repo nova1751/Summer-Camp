@@ -386,3 +386,12 @@ git config --global http.proxy http://127.0.0.1:7890
 # 取消代理
 git config --global --unset http.proxy
 ```
+
+#### 将文件从 Git 中移除
+
+```bash
+# 从 git 中删除，但仍然保留索引
+git rm --cached .\ui\bs\auto-imports.d.ts .\ui\bs\components.d.ts
+# 索引和本地都删除
+git rm .\ui\bs\auto-imports.d.ts .\ui\bs\components.d.ts
+```
